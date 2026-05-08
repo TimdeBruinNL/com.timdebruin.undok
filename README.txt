@@ -1,58 +1,13 @@
-UNDOK — Homey App
+Bring your internet radio into your smart home. UNDOK connects your Frontier Silicon radio directly to Homey, letting you control it with Flows, voice commands, and automations — no cloud required.
 
-Control your UNDOK / Frontier Silicon internet radio directly from Homey.
+Turn your radio on at sunrise, switch to your favourite station when you get home, or automatically lower the volume when a doorbell rings. Works with any UNDOK-compatible radio on your local network, including brands such as Kenwood, Hama, Revo, Roberts and Ruark.
 
-This app is not affiliated with, endorsed by, or connected to Frontier Silicon Ltd.
-or the UNDOK brand. UNDOK is a trademark of Frontier Silicon Ltd. This app uses
-the local FSAPI protocol to communicate directly with compatible devices on your
-local network.
+This app is not affiliated with or endorsed by Frontier Silicon Ltd. UNDOK is a trademark of Frontier Silicon Ltd.
 
+---
 
-SUPPORTED DEVICES
+Breng je internetradio naar je slimme huis. UNDOK verbindt je Frontier Silicon radio rechtstreeks met Homey, zodat je hem kunt bedienen met Flows, spraakopdrachten en automatiseringen — zonder cloud.
 
-Any internet radio based on the Frontier Silicon chipset that supports the FSAPI
-protocol and is compatible with the UNDOK app. This includes radios from brands
-such as Kenwood, Hama, Medion, Revo, Roberts, Ruark, and many others.
+Zet je radio aan bij zonsopgang, schakel naar je favoriete zender als je thuiskomt, of verlaag automatisch het volume als de deurbel gaat. Werkt met elke UNDOK-compatibele radio op je lokale netwerk, waaronder merken als Kenwood, Hama, Revo, Roberts en Ruark.
 
-
-FEATURES
-
-- Automatic discovery of radios on your local network via SSDP
-- Control multiple radios independently
-- Turn on/off
-- Select source (Internet Radio, DAB+, FM, CD, USB)
-- Select preset (internet radio station)
-- Volume control (set, up, down, mute, unmute)
-- Playback control (play, pause, next, previous track)
-- Now playing information: source, station name, song and artist
-- Full Flow integration with trigger, condition and action cards
-
-
-FLOW CARDS
-
-When: Radio turned on · Radio turned off · Volume changed · Preset changed
-And: Radio is on · Radio is off · Radio is muted · Current preset is equal to · Current volume is
-Then: Turn on · Turn off · Select source · Select preset · Set volume · Volume up · Volume down · Mute · Unmute · Play · Pause · Next track · Previous track · Turn on with source + preset + volume
-
-
-SETUP
-
-1. Install the app
-2. Go to Add Device and select UNDOK
-3. Your radio will be discovered automatically
-4. If your radio uses a non-default PIN, change it in the device settings after pairing
-   (default PIN: 1234)
-
-
-NOTES
-
-- The radio must be on the same local network as your Homey
-- Playback controls (play, pause, next, previous) only work when an applicable source
-  is selected (CD or USB)
-- Radio status is polled every 5 seconds
-
-
-SUPPORT
-
-For questions or issues, please visit:
-https://github.com/TimdeBruinNL/com.timdebruin.undok/issues
+Deze app is niet gelieerd aan of goedgekeurd door Frontier Silicon Ltd. UNDOK is een handelsmerk van Frontier Silicon Ltd.

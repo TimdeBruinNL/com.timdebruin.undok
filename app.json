@@ -11,10 +11,10 @@
     "fr": "UNDOK"
   },
   "description": {
-    "en": "Control your UNDOK / Frontier Silicon internet radios over your local network",
-    "nl": "Bedien uw UNDOK / Frontier Silicon internetradio's via uw lokale netwerk",
-    "de": "Steuern Sie Ihre UNDOK / Frontier Silicon Internetradios über Ihr lokales Netzwerk",
-    "fr": "Contrôlez vos radios internet UNDOK / Frontier Silicon via votre réseau local"
+    "en": "Listen smarter, automate your radio",
+    "nl": "Slimmer luisteren, automatiseer je radio",
+    "de": "Smarter hören, Radio automatisieren",
+    "fr": "Écoutez plus intelligemment, automatisez votre radio"
   },
   "tags": {
     "en": ["radio", "internet radio", "UNDOK", "DAB", "FM", "music", "audio"],
