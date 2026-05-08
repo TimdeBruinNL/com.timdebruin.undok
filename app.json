@@ -1,6 +1,6 @@
 {
   "id": "com.timdebruin.undok",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "compatibility": ">=12.0.0",
   "sdk": 3,
   "languages": [
@@ -67,6 +67,9 @@
   "license": "MIT",
   "homepage": "https://github.com/TimdeBruinNL/com.timdebruin.undok",
   "support": "https://github.com/TimdeBruinNL/com.timdebruin.undok/issues",
+  "bugs": {
+    "url": "https://community.homey.app/t/undok-control-your-frontier-silicon-internet-radio-with-homey/154664"
+  },
   "source": "https://github.com/TimdeBruinNL/com.timdebruin.undok",
   "images": {
     "small": "/assets/images/small.png",

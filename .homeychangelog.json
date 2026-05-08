@@ -4,5 +4,8 @@
   },
   "1.0.1": {
     "en": "updated description, readme and images for better compliance with App Store guideluines"
+  },
+  "1.0.2": {
+    "en": "Added community forum link for support and feedback."
   }
 }
