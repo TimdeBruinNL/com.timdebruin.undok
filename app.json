@@ -25,6 +25,7 @@
   "brandColor": "#6a0dad",
   "category": ["music"],
   "permissions": [],
+  "license": "MIT",
   "homepage": "https://github.com/TimdeBruinNL/com.timdebruin.undok",
   "support": "https://github.com/TimdeBruinNL/com.timdebruin.undok/issues",
   "source": "https://github.com/TimdeBruinNL/com.timdebruin.undok",
