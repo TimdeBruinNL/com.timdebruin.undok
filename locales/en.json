@@ -1,0 +1,6 @@
+{
+  "flow": {
+    "error_not_on": "Radio is not turned on",
+    "error_timeout": "Radio did not reach playing state within 10 seconds"
+  }
+}

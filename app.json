@@ -1,0 +1,332 @@
+{
+  "id": "com.timdebruin.undok",
+  "version": "1.0.0",
+  "compatibility": ">=12.0.0",
+  "sdk": 3,
+  "languages": ["en", "nl", "de", "fr"],
+  "name": {
+    "en": "UNDOK",
+    "nl": "UNDOK",
+    "de": "UNDOK",
+    "fr": "UNDOK"
+  },
+  "description": {
+    "en": "Control your UNDOK / Frontier Silicon internet radios over your local network",
+    "nl": "Bedien uw UNDOK / Frontier Silicon internetradio's via uw lokale netwerk",
+    "de": "Steuern Sie Ihre UNDOK / Frontier Silicon Internetradios über Ihr lokales Netzwerk",
+    "fr": "Contrôlez vos radios internet UNDOK / Frontier Silicon via votre réseau local"
+  },
+  "tags": {
+    "en": ["radio", "internet radio", "UNDOK", "DAB", "FM", "music", "audio"],
+    "nl": ["radio", "internetradio", "UNDOK", "DAB", "FM", "muziek", "audio"],
+    "de": ["Radio", "Internetradio", "UNDOK", "DAB", "FM", "Musik", "Audio"],
+    "fr": ["radio", "radio internet", "UNDOK", "DAB", "FM", "musique", "audio"]
+  },
+  "brandColor": "#6a0dad",
+  "category": ["music"],
+  "permissions": [],
+  "homepage": "https://github.com/TimdeBruinNL/com.timdebruin.undok",
+  "support": "https://github.com/TimdeBruinNL/com.timdebruin.undok/issues",
+  "source": "https://github.com/TimdeBruinNL/com.timdebruin.undok",
+  "images": {
+    "small": "/assets/images/small.png",
+    "large": "/assets/images/large.png",
+    "xlarge": "/assets/images/xlarge.png"
+  },
+  "author": {
+    "name": "Tim de Bruin",
+    "email": "282866099+TimdeBruinNL@users.noreply.github.com"
+  },
+  "capabilities": {
+    "input_source": {
+      "type": "enum",
+      "title": { "en": "Source", "nl": "Bron", "de": "Quelle", "fr": "Source" },
+      "getable": true,
+      "setable": true,
+      "uiComponent": "picker",
+      "values": [
+        { "id": "0", "title": { "en": "Loading...", "nl": "Laden...", "de": "Laden...", "fr": "Chargement..." } }
+      ],
+      "insights": false
+    },
+    "station_name": {
+      "type": "string",
+      "title": { "en": "Station Name", "nl": "Stationsnaam", "de": "Stationsname", "fr": "Nom de la station" },
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor",
+      "icon": "/assets/capabilities/station_name.svg",
+      "insights": false
+    },
+    "song": {
+      "type": "string",
+      "title": { "en": "Song", "nl": "Nummer", "de": "Lied", "fr": "Chanson" },
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor",
+      "icon": "/assets/capabilities/song.svg",
+      "insights": false
+    },
+    "now_playing": {
+      "type": "string",
+      "title": { "en": "Now Playing", "nl": "Nu afspelend", "de": "Gerade läuft", "fr": "En cours de lecture" },
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor",
+      "icon": "/assets/capabilities/now_playing.svg",
+      "insights": false
+    }
+  },
+  "flow": {
+    "triggers": [
+      {
+        "id": "volume_changed",
+        "title": { "en": "Volume changed", "nl": "Volume veranderd", "de": "Lautstärke geändert", "fr": "Volume modifié" },
+        "hint": {
+          "en": "Triggered when the volume changes externally (not via Homey)",
+          "nl": "Geactiveerd wanneer het volume extern wordt gewijzigd (niet via Homey)",
+          "de": "Wird ausgelöst, wenn die Lautstärke extern geändert wird (nicht über Homey)",
+          "fr": "Déclenché lorsque le volume change en dehors de Homey"
+        },
+        "tokens": [
+          {
+            "name": "volume",
+            "type": "number",
+            "title": { "en": "Volume", "nl": "Volume", "de": "Lautstärke", "fr": "Volume" }
+          }
+        ],
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=undok-radio"
+          }
+        ]
+      },
+      {
+        "id": "preset_changed",
+        "title": { "en": "Preset changed", "nl": "Preset gewijzigd", "de": "Voreinstellung geändert", "fr": "Préréglage modifié" },
+        "hint": {
+          "en": "Triggered when the preset changes externally (not via Homey)",
+          "nl": "Geactiveerd wanneer de preset extern wordt gewijzigd (niet via Homey)",
+          "de": "Wird ausgelöst, wenn die Voreinstellung extern geändert wird (nicht über Homey)",
+          "fr": "Déclenché lorsque le préréglage change en dehors de Homey"
+        },
+        "tokens": [
+          {
+            "name": "preset",
+            "type": "number",
+            "title": { "en": "Preset", "nl": "Preset", "de": "Voreinstellung", "fr": "Préréglage" }
+          }
+        ],
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=undok-radio"
+          }
+        ]
+      }
+    ],
+    "conditions": [
+      {
+        "id": "preset_condition",
+        "title": {
+          "en": "Current preset !{{is equal to|is not equal to}} [[preset]]",
+          "nl": "Huidige preset !{{is gelijk aan|is niet gelijk aan}} [[preset]]",
+          "de": "Aktuelle Voreinstellung !{{ist gleich|ist nicht gleich}} [[preset]]",
+          "fr": "Préréglage actuel !{{est égal à|n'est pas égal à}} [[preset]]"
+        },
+        "titleFormatted": {
+          "en": "Current preset !{{is equal to|is not equal to}} [[preset]]",
+          "nl": "Huidige preset !{{is gelijk aan|is niet gelijk aan}} [[preset]]",
+          "de": "Aktuelle Voreinstellung !{{ist gleich|ist nicht gleich}} [[preset]]",
+          "fr": "Préréglage actuel !{{est égal à|n'est pas égal à}} [[preset]]"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=undok-radio"
+          },
+          {
+            "type": "number",
+            "name": "preset",
+            "title": { "en": "Preset", "nl": "Preset", "de": "Voreinstellung", "fr": "Préréglage" },
+            "min": 1,
+            "max": 99,
+            "step": 1
+          }
+        ]
+      },
+      {
+        "id": "volume_condition",
+        "title": {
+          "en": "Current volume !{{is|is not}} [[operator]] [[volume]]",
+          "nl": "Huidig volume !{{is|is niet}} [[operator]] [[volume]]",
+          "de": "Aktuelle Lautstärke !{{ist|ist nicht}} [[operator]] [[volume]]",
+          "fr": "Volume actuel !{{est|n'est pas}} [[operator]] [[volume]]"
+        },
+        "titleFormatted": {
+          "en": "Current volume !{{is|is not}} [[operator]] [[volume]]",
+          "nl": "Huidig volume !{{is|is niet}} [[operator]] [[volume]]",
+          "de": "Aktuelle Lautstärke !{{ist|ist nicht}} [[operator]] [[volume]]",
+          "fr": "Volume actuel !{{est|n'est pas}} [[operator]] [[volume]]"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=undok-radio"
+          },
+          {
+            "type": "dropdown",
+            "name": "operator",
+            "title": { "en": "Operator", "nl": "Operator", "de": "Operator", "fr": "Opérateur" },
+            "values": [
+              { "id": "eq", "label": { "en": "equal to", "nl": "gelijk aan", "de": "gleich", "fr": "égal à" } },
+              { "id": "gt", "label": { "en": "greater than", "nl": "groter dan", "de": "größer als", "fr": "supérieur à" } },
+              { "id": "lt", "label": { "en": "less than", "nl": "kleiner dan", "de": "kleiner als", "fr": "inférieur à" } }
+            ]
+          },
+          {
+            "type": "number",
+            "name": "volume",
+            "title": { "en": "Volume", "nl": "Volume", "de": "Lautstärke", "fr": "Volume" },
+            "min": 0,
+            "max": 100,
+            "step": 1
+          }
+        ]
+      },
+      {
+        "id": "is_muted",
+        "title": {
+          "en": "Radio !{{is|is not}} muted",
+          "nl": "Radio !{{is|is niet}} gedempt",
+          "de": "Radio !{{ist|ist nicht}} stummgeschaltet",
+          "fr": "La radio !{{est|n'est pas}} en mode silencieux"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=undok-radio"
+          }
+        ]
+      }
+    ],
+    "actions": [
+      {
+        "id": "select_source",
+        "title": { "en": "Select source", "nl": "Selecteer bron", "de": "Quelle auswählen", "fr": "Sélectionner la source" },
+        "titleFormatted": { "en": "Select source [[source]]", "nl": "Selecteer bron [[source]]", "de": "Quelle auswählen [[source]]", "fr": "Sélectionner la source [[source]]" },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=undok-radio"
+          },
+          {
+            "type": "autocomplete",
+            "name": "source",
+            "title": { "en": "Source", "nl": "Bron", "de": "Quelle", "fr": "Source" }
+          }
+        ]
+      },
+      {
+        "id": "select_preset",
+        "title": { "en": "Select preset", "nl": "Selecteer preset", "de": "Voreinstellung auswählen", "fr": "Sélectionner le préréglage" },
+        "titleFormatted": { "en": "Select preset [[preset]]", "nl": "Selecteer preset [[preset]]", "de": "Voreinstellung auswählen [[preset]]", "fr": "Sélectionner le préréglage [[preset]]" },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=undok-radio"
+          },
+          {
+            "type": "number",
+            "name": "preset",
+            "title": { "en": "Preset", "nl": "Preset", "de": "Voreinstellung", "fr": "Préréglage" },
+            "min": 1,
+            "step": 1
+          }
+        ]
+      },
+      {
+        "id": "turn_on_full",
+        "title": { "en": "Turn on, select source, preset, and volume", "nl": "Zet aan, selecteer bron, preset en volume", "de": "Einschalten, Quelle, Voreinstellung und Lautstärke wählen", "fr": "Allumer, sélectionner la source, le préréglage et le volume" },
+        "titleFormatted": { "en": "Turn on, source [[source]], preset [[preset]], volume [[volume]]", "nl": "Zet aan, bron [[source]], preset [[preset]], volume [[volume]]", "de": "Einschalten, Quelle [[source]], Voreinstellung [[preset]], Lautstärke [[volume]]", "fr": "Allumer, source [[source]], préréglage [[preset]], volume [[volume]]" },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=undok-radio"
+          },
+          {
+            "type": "autocomplete",
+            "name": "source",
+            "title": { "en": "Source", "nl": "Bron", "de": "Quelle", "fr": "Source" }
+          },
+          {
+            "type": "number",
+            "name": "preset",
+            "title": { "en": "Preset", "nl": "Preset", "de": "Voreinstellung", "fr": "Préréglage" },
+            "min": 1,
+            "step": 1
+          },
+          {
+            "type": "number",
+            "name": "volume",
+            "title": { "en": "Volume", "nl": "Volume", "de": "Lautstärke", "fr": "Volume" },
+            "min": 0,
+            "step": 1
+          }
+        ]
+      }
+    ]
+  },
+  "drivers": [
+    {
+      "id": "undok-radio",
+      "name": { "en": "UNDOK Radio", "nl": "UNDOK Radio", "de": "UNDOK Radio", "fr": "UNDOK Radio" },
+      "class": "speaker",
+      "icon": "/drivers/undok-radio/assets/icon.svg",
+      "capabilities": ["onoff", "input_source", "volume_set", "volume_down", "volume_up", "volume_mute", "speaker_prev", "speaker_playing", "speaker_next", "station_name", "song", "now_playing"],
+      "capabilitiesOptions": {
+        "volume_set": {
+          "title": { "en": "Volume", "nl": "Volume", "de": "Lautstärke", "fr": "Volume" },
+          "min": 0,
+          "max": 1,
+          "step": 0.01
+        }
+      },
+      "images": {
+        "small": "/drivers/undok-radio/assets/images/small.png",
+        "large": "/drivers/undok-radio/assets/images/large.png",
+        "xlarge": "/drivers/undok-radio/assets/images/xlarge.png"
+      },
+      "pair": [
+        {
+          "id": "list_devices",
+          "template": "list_devices",
+          "navigation": {
+            "next": "add_devices"
+          }
+        },
+        {
+          "id": "add_devices",
+          "template": "add_devices"
+        }
+      ],
+      "settings": [
+        {
+          "id": "pin",
+          "type": "text",
+          "label": { "en": "PIN code", "nl": "Pincode", "de": "PIN-Code", "fr": "Code PIN" },
+          "value": "1234"
+        }
+      ]
+    }
+  ]
+}

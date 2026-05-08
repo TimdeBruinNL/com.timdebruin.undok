@@ -1,0 +1,6 @@
+{
+  "flow": {
+    "error_not_on": "Radio ist nicht eingeschaltet",
+    "error_timeout": "Das Radio hat den Wiedergabestatus nicht innerhalb von 10 Sekunden erreicht"
+  }
+}

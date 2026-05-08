@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 60 60">
+  <!-- Circle -->
+  <circle cx="30" cy="30" r="26" fill="none" stroke="currentColor" stroke-width="3"/>
+  <!-- Play triangle -->
+  <polygon points="24,20 24,40 44,30" fill="none" stroke="currentColor" stroke-width="3" stroke-linejoin="round"/>
+</svg>
