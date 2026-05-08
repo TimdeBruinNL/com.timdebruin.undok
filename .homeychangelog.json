@@ -1,5 +1,8 @@
 {
   "1.0.0": {
     "en": "initial public release"
+  },
+  "1.0.1": {
+    "en": "updated description, readme and images for better compliance with App Store guideluines"
   }
 }

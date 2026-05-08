@@ -1,9 +1,14 @@
 {
   "id": "com.timdebruin.undok",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "compatibility": ">=12.0.0",
   "sdk": 3,
-  "languages": ["en", "nl", "de", "fr"],
+  "languages": [
+    "en",
+    "nl",
+    "de",
+    "fr"
+  ],
   "name": {
     "en": "UNDOK",
     "nl": "UNDOK",
@@ -17,13 +22,47 @@
     "fr": "Écoutez plus intelligemment, automatisez votre radio"
   },
   "tags": {
-    "en": ["radio", "internet radio", "UNDOK", "DAB", "FM", "music", "audio"],
-    "nl": ["radio", "internetradio", "UNDOK", "DAB", "FM", "muziek", "audio"],
-    "de": ["Radio", "Internetradio", "UNDOK", "DAB", "FM", "Musik", "Audio"],
-    "fr": ["radio", "radio internet", "UNDOK", "DAB", "FM", "musique", "audio"]
+    "en": [
+      "radio",
+      "internet radio",
+      "UNDOK",
+      "DAB",
+      "FM",
+      "music",
+      "audio"
+    ],
+    "nl": [
+      "radio",
+      "internetradio",
+      "UNDOK",
+      "DAB",
+      "FM",
+      "muziek",
+      "audio"
+    ],
+    "de": [
+      "Radio",
+      "Internetradio",
+      "UNDOK",
+      "DAB",
+      "FM",
+      "Musik",
+      "Audio"
+    ],
+    "fr": [
+      "radio",
+      "radio internet",
+      "UNDOK",
+      "DAB",
+      "FM",
+      "musique",
+      "audio"
+    ]
   },
   "brandColor": "#6a0dad",
-  "category": ["music"],
+  "category": [
+    "music"
+  ],
   "permissions": [],
   "license": "MIT",
   "homepage": "https://github.com/TimdeBruinNL/com.timdebruin.undok",
@@ -41,18 +80,36 @@
   "capabilities": {
     "input_source": {
       "type": "enum",
-      "title": { "en": "Source", "nl": "Bron", "de": "Quelle", "fr": "Source" },
+      "title": {
+        "en": "Source",
+        "nl": "Bron",
+        "de": "Quelle",
+        "fr": "Source"
+      },
       "getable": true,
       "setable": true,
       "uiComponent": "picker",
       "values": [
-        { "id": "0", "title": { "en": "Loading...", "nl": "Laden...", "de": "Laden...", "fr": "Chargement..." } }
+        {
+          "id": "0",
+          "title": {
+            "en": "Loading...",
+            "nl": "Laden...",
+            "de": "Laden...",
+            "fr": "Chargement..."
+          }
+        }
       ],
       "insights": false
     },
     "station_name": {
       "type": "string",
-      "title": { "en": "Station Name", "nl": "Stationsnaam", "de": "Stationsname", "fr": "Nom de la station" },
+      "title": {
+        "en": "Station Name",
+        "nl": "Stationsnaam",
+        "de": "Stationsname",
+        "fr": "Nom de la station"
+      },
       "getable": true,
       "setable": false,
       "uiComponent": "sensor",
@@ -61,7 +118,12 @@
     },
     "song": {
       "type": "string",
-      "title": { "en": "Song", "nl": "Nummer", "de": "Lied", "fr": "Chanson" },
+      "title": {
+        "en": "Song",
+        "nl": "Nummer",
+        "de": "Lied",
+        "fr": "Chanson"
+      },
       "getable": true,
       "setable": false,
       "uiComponent": "sensor",
@@ -70,7 +132,12 @@
     },
     "now_playing": {
       "type": "string",
-      "title": { "en": "Now Playing", "nl": "Nu afspelend", "de": "Gerade läuft", "fr": "En cours de lecture" },
+      "title": {
+        "en": "Now Playing",
+        "nl": "Nu afspelend",
+        "de": "Gerade läuft",
+        "fr": "En cours de lecture"
+      },
       "getable": true,
       "setable": false,
       "uiComponent": "sensor",
@@ -82,7 +149,12 @@
     "triggers": [
       {
         "id": "volume_changed",
-        "title": { "en": "Volume changed", "nl": "Volume veranderd", "de": "Lautstärke geändert", "fr": "Volume modifié" },
+        "title": {
+          "en": "Volume changed",
+          "nl": "Volume veranderd",
+          "de": "Lautstärke geändert",
+          "fr": "Volume modifié"
+        },
         "hint": {
           "en": "Triggered when the volume changes externally (not via Homey)",
           "nl": "Geactiveerd wanneer het volume extern wordt gewijzigd (niet via Homey)",
@@ -93,7 +165,12 @@
           {
             "name": "volume",
             "type": "number",
-            "title": { "en": "Volume", "nl": "Volume", "de": "Lautstärke", "fr": "Volume" }
+            "title": {
+              "en": "Volume",
+              "nl": "Volume",
+              "de": "Lautstärke",
+              "fr": "Volume"
+            }
           }
         ],
         "args": [
@@ -106,7 +183,12 @@
       },
       {
         "id": "preset_changed",
-        "title": { "en": "Preset changed", "nl": "Preset gewijzigd", "de": "Voreinstellung geändert", "fr": "Préréglage modifié" },
+        "title": {
+          "en": "Preset changed",
+          "nl": "Preset gewijzigd",
+          "de": "Voreinstellung geändert",
+          "fr": "Préréglage modifié"
+        },
         "hint": {
           "en": "Triggered when the preset changes externally (not via Homey)",
           "nl": "Geactiveerd wanneer de preset extern wordt gewijzigd (niet via Homey)",
@@ -117,7 +199,12 @@
           {
             "name": "preset",
             "type": "number",
-            "title": { "en": "Preset", "nl": "Preset", "de": "Voreinstellung", "fr": "Préréglage" }
+            "title": {
+              "en": "Preset",
+              "nl": "Preset",
+              "de": "Voreinstellung",
+              "fr": "Préréglage"
+            }
           }
         ],
         "args": [
@@ -153,7 +240,12 @@
           {
             "type": "number",
             "name": "preset",
-            "title": { "en": "Preset", "nl": "Preset", "de": "Voreinstellung", "fr": "Préréglage" },
+            "title": {
+              "en": "Preset",
+              "nl": "Preset",
+              "de": "Voreinstellung",
+              "fr": "Préréglage"
+            },
             "min": 1,
             "max": 99,
             "step": 1
@@ -183,17 +275,51 @@
           {
             "type": "dropdown",
             "name": "operator",
-            "title": { "en": "Operator", "nl": "Operator", "de": "Operator", "fr": "Opérateur" },
+            "title": {
+              "en": "Operator",
+              "nl": "Operator",
+              "de": "Operator",
+              "fr": "Opérateur"
+            },
             "values": [
-              { "id": "eq", "label": { "en": "equal to", "nl": "gelijk aan", "de": "gleich", "fr": "égal à" } },
-              { "id": "gt", "label": { "en": "greater than", "nl": "groter dan", "de": "größer als", "fr": "supérieur à" } },
-              { "id": "lt", "label": { "en": "less than", "nl": "kleiner dan", "de": "kleiner als", "fr": "inférieur à" } }
+              {
+                "id": "eq",
+                "label": {
+                  "en": "equal to",
+                  "nl": "gelijk aan",
+                  "de": "gleich",
+                  "fr": "égal à"
+                }
+              },
+              {
+                "id": "gt",
+                "label": {
+                  "en": "greater than",
+                  "nl": "groter dan",
+                  "de": "größer als",
+                  "fr": "supérieur à"
+                }
+              },
+              {
+                "id": "lt",
+                "label": {
+                  "en": "less than",
+                  "nl": "kleiner dan",
+                  "de": "kleiner als",
+                  "fr": "inférieur à"
+                }
+              }
             ]
           },
           {
             "type": "number",
             "name": "volume",
-            "title": { "en": "Volume", "nl": "Volume", "de": "Lautstärke", "fr": "Volume" },
+            "title": {
+              "en": "Volume",
+              "nl": "Volume",
+              "de": "Lautstärke",
+              "fr": "Volume"
+            },
             "min": 0,
             "max": 100,
             "step": 1
@@ -220,8 +346,18 @@
     "actions": [
       {
         "id": "select_source",
-        "title": { "en": "Select source", "nl": "Selecteer bron", "de": "Quelle auswählen", "fr": "Sélectionner la source" },
-        "titleFormatted": { "en": "Select source [[source]]", "nl": "Selecteer bron [[source]]", "de": "Quelle auswählen [[source]]", "fr": "Sélectionner la source [[source]]" },
+        "title": {
+          "en": "Select source",
+          "nl": "Selecteer bron",
+          "de": "Quelle auswählen",
+          "fr": "Sélectionner la source"
+        },
+        "titleFormatted": {
+          "en": "Select source [[source]]",
+          "nl": "Selecteer bron [[source]]",
+          "de": "Quelle auswählen [[source]]",
+          "fr": "Sélectionner la source [[source]]"
+        },
         "args": [
           {
             "type": "device",
@@ -231,14 +367,29 @@
           {
             "type": "autocomplete",
             "name": "source",
-            "title": { "en": "Source", "nl": "Bron", "de": "Quelle", "fr": "Source" }
+            "title": {
+              "en": "Source",
+              "nl": "Bron",
+              "de": "Quelle",
+              "fr": "Source"
+            }
           }
         ]
       },
       {
         "id": "select_preset",
-        "title": { "en": "Select preset", "nl": "Selecteer preset", "de": "Voreinstellung auswählen", "fr": "Sélectionner le préréglage" },
-        "titleFormatted": { "en": "Select preset [[preset]]", "nl": "Selecteer preset [[preset]]", "de": "Voreinstellung auswählen [[preset]]", "fr": "Sélectionner le préréglage [[preset]]" },
+        "title": {
+          "en": "Select preset",
+          "nl": "Selecteer preset",
+          "de": "Voreinstellung auswählen",
+          "fr": "Sélectionner le préréglage"
+        },
+        "titleFormatted": {
+          "en": "Select preset [[preset]]",
+          "nl": "Selecteer preset [[preset]]",
+          "de": "Voreinstellung auswählen [[preset]]",
+          "fr": "Sélectionner le préréglage [[preset]]"
+        },
         "args": [
           {
             "type": "device",
@@ -248,7 +399,12 @@
           {
             "type": "number",
             "name": "preset",
-            "title": { "en": "Preset", "nl": "Preset", "de": "Voreinstellung", "fr": "Préréglage" },
+            "title": {
+              "en": "Preset",
+              "nl": "Preset",
+              "de": "Voreinstellung",
+              "fr": "Préréglage"
+            },
             "min": 1,
             "step": 1
           }
@@ -256,8 +412,18 @@
       },
       {
         "id": "turn_on_full",
-        "title": { "en": "Turn on, select source, preset, and volume", "nl": "Zet aan, selecteer bron, preset en volume", "de": "Einschalten, Quelle, Voreinstellung und Lautstärke wählen", "fr": "Allumer, sélectionner la source, le préréglage et le volume" },
-        "titleFormatted": { "en": "Turn on, source [[source]], preset [[preset]], volume [[volume]]", "nl": "Zet aan, bron [[source]], preset [[preset]], volume [[volume]]", "de": "Einschalten, Quelle [[source]], Voreinstellung [[preset]], Lautstärke [[volume]]", "fr": "Allumer, source [[source]], préréglage [[preset]], volume [[volume]]" },
+        "title": {
+          "en": "Turn on, select source, preset, and volume",
+          "nl": "Zet aan, selecteer bron, preset en volume",
+          "de": "Einschalten, Quelle, Voreinstellung und Lautstärke wählen",
+          "fr": "Allumer, sélectionner la source, le préréglage et le volume"
+        },
+        "titleFormatted": {
+          "en": "Turn on, source [[source]], preset [[preset]], volume [[volume]]",
+          "nl": "Zet aan, bron [[source]], preset [[preset]], volume [[volume]]",
+          "de": "Einschalten, Quelle [[source]], Voreinstellung [[preset]], Lautstärke [[volume]]",
+          "fr": "Allumer, source [[source]], préréglage [[preset]], volume [[volume]]"
+        },
         "args": [
           {
             "type": "device",
@@ -267,19 +433,34 @@
           {
             "type": "autocomplete",
             "name": "source",
-            "title": { "en": "Source", "nl": "Bron", "de": "Quelle", "fr": "Source" }
+            "title": {
+              "en": "Source",
+              "nl": "Bron",
+              "de": "Quelle",
+              "fr": "Source"
+            }
           },
           {
             "type": "number",
             "name": "preset",
-            "title": { "en": "Preset", "nl": "Preset", "de": "Voreinstellung", "fr": "Préréglage" },
+            "title": {
+              "en": "Preset",
+              "nl": "Preset",
+              "de": "Voreinstellung",
+              "fr": "Préréglage"
+            },
             "min": 1,
             "step": 1
           },
           {
             "type": "number",
             "name": "volume",
-            "title": { "en": "Volume", "nl": "Volume", "de": "Lautstärke", "fr": "Volume" },
+            "title": {
+              "en": "Volume",
+              "nl": "Volume",
+              "de": "Lautstärke",
+              "fr": "Volume"
+            },
             "min": 0,
             "step": 1
           }
@@ -290,13 +471,36 @@
   "drivers": [
     {
       "id": "undok-radio",
-      "name": { "en": "UNDOK Radio", "nl": "UNDOK Radio", "de": "UNDOK Radio", "fr": "UNDOK Radio" },
+      "name": {
+        "en": "UNDOK Radio",
+        "nl": "UNDOK Radio",
+        "de": "UNDOK Radio",
+        "fr": "UNDOK Radio"
+      },
       "class": "speaker",
       "icon": "/drivers/undok-radio/assets/icon.svg",
-      "capabilities": ["onoff", "input_source", "volume_set", "volume_down", "volume_up", "volume_mute", "speaker_prev", "speaker_playing", "speaker_next", "station_name", "song", "now_playing"],
+      "capabilities": [
+        "onoff",
+        "input_source",
+        "volume_set",
+        "volume_down",
+        "volume_up",
+        "volume_mute",
+        "speaker_prev",
+        "speaker_playing",
+        "speaker_next",
+        "station_name",
+        "song",
+        "now_playing"
+      ],
       "capabilitiesOptions": {
         "volume_set": {
-          "title": { "en": "Volume", "nl": "Volume", "de": "Lautstärke", "fr": "Volume" },
+          "title": {
+            "en": "Volume",
+            "nl": "Volume",
+            "de": "Lautstärke",
+            "fr": "Volume"
+          },
           "min": 0,
           "max": 1,
           "step": 0.01
@@ -324,7 +528,12 @@
         {
           "id": "pin",
           "type": "text",
-          "label": { "en": "PIN code", "nl": "Pincode", "de": "PIN-Code", "fr": "Code PIN" },
+          "label": {
+            "en": "PIN code",
+            "nl": "Pincode",
+            "de": "PIN-Code",
+            "fr": "Code PIN"
+          },
           "value": "1234"
         }
       ]
