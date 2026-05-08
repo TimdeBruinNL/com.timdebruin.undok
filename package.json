@@ -4,6 +4,5 @@
   "main": "app.js",
   "scripts": {
     "start": "homey app run"
-  },
-  "dependencies": {}
+  }
 }
