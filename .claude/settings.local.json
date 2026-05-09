@@ -1,9 +1,0 @@
-{
-  "permissions": {
-    "allow": [
-      "Bash(homey app *)",
-      "Bash(git add *)",
-      "Bash(git commit *)"
-    ]
-  }
-}

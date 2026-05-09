@@ -1,6 +1,6 @@
 {
   "id": "com.timdebruin.undok",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "compatibility": ">=12.0.0",
   "sdk": 3,
   "languages": [
@@ -10,54 +10,22 @@
     "fr"
   ],
   "name": {
-    "en": "UNDOK",
-    "nl": "UNDOK",
-    "de": "UNDOK",
-    "fr": "UNDOK"
+    "en": "UNDOK internet radio",
+    "nl": "UNDOK internet radio",
+    "de": "UNDOK Internetradio",
+    "fr": "UNDOK radio internet"
   },
   "description": {
-    "en": "Listen smarter, automate your radio",
-    "nl": "Slimmer luisteren, automatiseer je radio",
-    "de": "Smarter hören, Radio automatisieren",
-    "fr": "Écoutez plus intelligemment, automatisez votre radio"
+    "en": "Listen smarter, automate your internet radio",
+    "nl": "Slimmer luisteren, automatiseer je internet radio",
+    "de": "Smarter hören, Ihr Internetradio automatisieren",
+    "fr": "Écoutez plus intelligemment, automatisez votre radio internet"
   },
   "tags": {
-    "en": [
-      "radio",
-      "internet radio",
-      "UNDOK",
-      "DAB",
-      "FM",
-      "music",
-      "audio"
-    ],
-    "nl": [
-      "radio",
-      "internetradio",
-      "UNDOK",
-      "DAB",
-      "FM",
-      "muziek",
-      "audio"
-    ],
-    "de": [
-      "Radio",
-      "Internetradio",
-      "UNDOK",
-      "DAB",
-      "FM",
-      "Musik",
-      "Audio"
-    ],
-    "fr": [
-      "radio",
-      "radio internet",
-      "UNDOK",
-      "DAB",
-      "FM",
-      "musique",
-      "audio"
-    ]
+    "en": ["internet radio", "WiFi radio", "LAN radio", "radio", "DAB", "DAB+", "FM", "streaming", "audio", "music", "UNDOK", "Frontier Silicon", "Kenwood", "Hama", "Sangean", "Roberts", "TechniSat", "Medion", "Revo", "Ruark", "Silvercrest", "Pure", "Sharp", "Teufel"],
+    "nl": ["internetradio", "WiFi radio", "LAN radio", "radio", "DAB", "DAB+", "FM", "streaming", "audio", "muziek", "UNDOK", "Frontier Silicon", "Kenwood", "Hama", "Sangean", "Roberts", "TechniSat", "Medion", "Revo", "Ruark", "Silvercrest", "Pure", "Sharp", "Teufel"],
+    "de": ["Internetradio", "WiFi Radio", "LAN Radio", "Radio", "DAB", "DAB+", "FM", "Streaming", "Audio", "Musik", "UNDOK", "Frontier Silicon", "Kenwood", "Hama", "Sangean", "Roberts", "TechniSat", "Medion", "Revo", "Ruark", "Silvercrest", "Pure", "Sharp", "Teufel"],
+    "fr": ["radio internet", "radio WiFi", "radio LAN", "radio", "DAB", "DAB+", "FM", "streaming", "audio", "musique", "UNDOK", "Frontier Silicon", "Kenwood", "Hama", "Sangean", "Roberts", "TechniSat", "Medion", "Revo", "Ruark", "Silvercrest", "Pure", "Sharp", "Teufel"]
   },
   "brandColor": "#6a0dad",
   "category": [
@@ -70,6 +38,7 @@
   "bugs": {
     "url": "https://community.homey.app/t/undok-control-your-frontier-silicon-internet-radio-with-homey/154664"
   },
+  "homeyCommunityTopicId": 154664,
   "source": "https://github.com/TimdeBruinNL/com.timdebruin.undok",
   "images": {
     "small": "/assets/images/small.png",
