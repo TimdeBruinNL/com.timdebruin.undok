@@ -10,5 +10,8 @@
   },
   "1.0.3": {
     "en": "Text improvements"
+  },
+  "1.1.0": {
+    "en": "Batch GET polling for improved performance, configurable poll interval per device (5-60 seconds), volume standardised to percentage (0-100%) throughout the app"
   }
 }

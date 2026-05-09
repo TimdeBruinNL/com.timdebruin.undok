@@ -4,7 +4,7 @@ const { Device } = require('homey');
 const { discover } = require('../../lib/SsdpDiscovery');
 const { FsApi, FSAPI_STATUS, PLAY_CONTROL } = require('../../lib/FsApi');
 
-const POLL_INTERVAL_MS = 5000;
+const DEFAULT_POLL_INTERVAL_S = 10;
 const MAX_CONSECUTIVE_FAILURES = 10;
 const STARTUP_SUSPEND_MS = 30000;
 
@@ -40,7 +40,8 @@ class UndokDevice extends Device {
     this._currentStation = '';
     this._currentArtist = '';
     this._currentSong = '';
-    this._currentAlbum = '';
+    this._radioIsOff = false;
+    this._pollActive = false;
 
     // Remove capabilities that were renamed or removed in this version
     for (const cap of ['speaker_artist', 'speaker_track', 'source']) {
@@ -68,9 +69,12 @@ class UndokDevice extends Device {
     this._startPolling();
   }
 
-  async onSettings({ newSettings }) {
-    if (this._api) {
+  async onSettings({ newSettings, changedKeys }) {
+    if (changedKeys.includes('pin') && this._api) {
       this._api.pin = newSettings.pin;
+    }
+    if (changedKeys.includes('poll_interval')) {
+      this._startPolling();
     }
   }
 
@@ -115,6 +119,10 @@ class UndokDevice extends Device {
     await this._api.set('netRemote.sys.power', value ? 1 : 0);
     if (value) {
       this._consecutivePowerOff = 0;
+      if (this._radioIsOff) {
+        this._radioIsOff = false;
+        this._startPolling();
+      }
       this._beginStartup();
     } else {
       if (this._startupActive) this._endStartup();
@@ -174,7 +182,10 @@ class UndokDevice extends Device {
   // ── Public methods (called from driver flow card run listeners) ───────────
 
   getCurrentPreset() { return this._currentPreset; }
-  getCurrentVolume() { return this._currentVolume; }
+  getCurrentVolume() {
+    const max = this._volumeMax();
+    return max > 0 ? Math.round((this._currentVolume / max) * 100) : 0;
+  }
   isMuted() { return this._isMuted; }
 
   async setSource(modeInt) {
@@ -242,7 +253,7 @@ class UndokDevice extends Device {
     this._mutedViaNode = false;
   }
 
-  async turnOnFull(modeInt, preset1based, volumeInt) {
+  async turnOnFull(modeInt, preset1based, volumePct) {
     this._ensureApi();
     this._startupInProgress = true;
     this._beginStartup();
@@ -265,7 +276,7 @@ class UndokDevice extends Device {
       await this._delay(300);
 
       const max = this._volumeMax();
-      const clamped = Math.max(0, Math.min(Math.round(volumeInt), max));
+      const clamped = Math.max(0, Math.min(Math.round((volumePct / 100) * max), max));
       await this._startupSet('netRemote.sys.audio.volume', clamped);
 
       const confirmedVol = await this._api.get('netRemote.sys.audio.volume');
@@ -285,19 +296,41 @@ class UndokDevice extends Device {
 
   // ── Polling ──────────────────────────────────────────────────────────────
 
+  _getConfiguredPollMs() {
+    return (this.getSetting('poll_interval') || DEFAULT_POLL_INTERVAL_S) * 1000;
+  }
+
+  _getEffectivePollMs() {
+    const base = this._getConfiguredPollMs();
+    return this._radioIsOff ? Math.min(base * 3, 60000) : base;
+  }
+
   _startPolling() {
     this._stopPolling();
-    this.log('polling started');
-    this._pollTimer = setInterval(
-      () => this._poll().catch((e) => this.error(`poll error: ${String(e)}`)),
-      POLL_INTERVAL_MS,
-    );
+    this._pollActive = true;
+    this.log(`polling started (interval: ${this._getEffectivePollMs() / 1000}s)`);
+    this._schedulePoll(this._getEffectivePollMs());
+  }
+
+  _schedulePoll(ms) {
+    this._pollTimer = setTimeout(() => this._runPollCycle(), ms);
+  }
+
+  async _runPollCycle() {
+    if (!this._pollActive) return;
+    this._pollTimer = null;
+    await this._poll().catch((e) => this.error(`poll error: ${String(e)}`));
+    // Schedule next cycle only if _poll() did not already reschedule (e.g. via _startPolling)
+    if (this._pollActive && this._pollTimer === null) {
+      this._schedulePoll(this._getEffectivePollMs());
+    }
   }
 
   _stopPolling() {
+    this._pollActive = false;
     if (this._pollTimer) {
       this.log('polling stopped');
-      clearInterval(this._pollTimer);
+      clearTimeout(this._pollTimer);
       this._pollTimer = null;
     }
   }
@@ -332,7 +365,7 @@ class UndokDevice extends Device {
       return;
     }
 
-    const { power, volume, mute, mode, preset, playStatus, name, artist, text, album } = state;
+    const { power, volume, mute, mode, preset, playStatus, name, artist, text } = state;
 
     // ── Power state ──────────────────────────────────────────────────────────
     const wasOn = this.getCapabilityValue('onoff');
@@ -351,6 +384,11 @@ class UndokDevice extends Device {
 
     } else if (power === '1') {
       this._consecutivePowerOff = 0;
+      if (this._radioIsOff) {
+        // Radio came back on — immediately revert to configured (1x) poll interval
+        this._radioIsOff = false;
+        this._startPolling();
+      }
       if (!wasOn) {
         await this.setCapabilityValue('onoff', true);
         this._beginStartup();
@@ -365,6 +403,7 @@ class UndokDevice extends Device {
           this._consecutivePowerOff++;
           if (this._consecutivePowerOff >= POWER_OFF_THRESHOLD) {
             this._consecutivePowerOff = 0;
+            this._radioIsOff = true; // switch to 3x poll interval on next cycle
             await this.setCapabilityValue('onoff', false);
           }
         } else {
@@ -380,7 +419,9 @@ class UndokDevice extends Device {
       if (volumeInt !== this._currentVolume) {
         this._currentVolume = volumeInt;
         await this._syncVolumeCapability(volumeInt);
-        this.driver.triggerVolumeChanged(this, volumeInt);
+        const max = this._volumeMax();
+        const volumePct = max > 0 ? Math.round((volumeInt / max) * 100) : 0;
+        this.driver.triggerVolumeChanged(this, volumePct);
       }
     }
 
@@ -432,7 +473,6 @@ class UndokDevice extends Device {
     if (name !== null) this._currentStation = name;
     if (artist !== null) this._currentArtist = artist;
     if (text !== null) this._currentSong = text;
-    if (album !== null) this._currentAlbum = album;
 
     if (!this.getCapabilityValue('onoff')) {
       await this._clearNowPlaying();

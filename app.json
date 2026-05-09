@@ -1,6 +1,6 @@
 {
   "id": "com.timdebruin.undok",
-  "version": "1.0.3",
+  "version": "1.1.0",
   "compatibility": ">=12.0.0",
   "sdk": 3,
   "languages": [
@@ -391,10 +391,10 @@
           "fr": "Allumer, sélectionner la source, le préréglage et le volume"
         },
         "titleFormatted": {
-          "en": "Turn on, source [[source]], preset [[preset]], volume [[volume]]",
-          "nl": "Zet aan, bron [[source]], preset [[preset]], volume [[volume]]",
-          "de": "Einschalten, Quelle [[source]], Voreinstellung [[preset]], Lautstärke [[volume]]",
-          "fr": "Allumer, source [[source]], préréglage [[preset]], volume [[volume]]"
+          "en": "Turn on, source [[source]], preset [[preset]], volume [[volume]]%",
+          "nl": "Zet aan, bron [[source]], preset [[preset]], volume [[volume]]%",
+          "de": "Einschalten, Quelle [[source]], Voreinstellung [[preset]], Lautstärke [[volume]]%",
+          "fr": "Allumer, source [[source]], préréglage [[preset]], volume [[volume]]%"
         },
         "args": [
           {
@@ -434,7 +434,15 @@
               "fr": "Volume"
             },
             "min": 0,
-            "step": 1
+            "max": 100,
+            "step": 1,
+            "suffix": "%",
+            "hint": {
+              "en": "Volume level (0-100%)",
+              "nl": "Volumeniveau (0-100%)",
+              "de": "Lautstärkepegel (0-100 %)",
+              "fr": "Niveau de volume (0-100 %)"
+            }
           }
         ]
       }
@@ -507,6 +515,27 @@
             "fr": "Code PIN"
           },
           "value": "1234"
+        },
+        {
+          "id": "poll_interval",
+          "type": "number",
+          "label": {
+            "en": "Poll interval",
+            "nl": "Poll interval",
+            "de": "Abfrageintervall",
+            "fr": "Intervalle d'interrogation"
+          },
+          "value": 10,
+          "min": 5,
+          "max": 60,
+          "step": 1,
+          "units": "s",
+          "hint": {
+            "en": "How often Homey checks the radio status. Lower values are more responsive but use more resources.",
+            "nl": "Hoe vaak Homey de radiostatus controleert. Lagere waarden zijn responsiever maar verbruiken meer middelen.",
+            "de": "Wie oft Homey den Radiostatus prüft. Niedrigere Werte reagieren schneller, verbrauchen aber mehr Ressourcen.",
+            "fr": "La fréquence à laquelle Homey vérifie l'état de la radio. Des valeurs plus faibles sont plus réactives mais consomment plus de ressources."
+          }
         }
       ]
     }
