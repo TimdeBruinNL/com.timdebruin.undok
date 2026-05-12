@@ -255,35 +255,65 @@ class UndokDevice extends Device {
 
   async turnOnFull(modeInt, preset1based, volumePct) {
     this._ensureApi();
+    const max = this._volumeMax();
+    const targetVol = Math.max(0, Math.min(Math.round((volumePct / 100) * max), max));
+
     this._startupInProgress = true;
     this._beginStartup();
 
     try {
-      await this._startupSet('netRemote.sys.power', 1);
-      await this._delay(1500);
+      const wasOn = this.getCapabilityValue('onoff');
 
+      // Step 0: Pre-power mute — prevents amplifier click/pop on power-on.
+      // Radio may be fully off and not accepting commands — silently skip on any error.
+      if (!wasOn) {
+        try {
+          await this._api.set('netRemote.sys.audio.mute', 1);
+        } catch (_) { /* radio not yet accepting commands — expected when fully off */ }
+      }
+
+      // Step 1: Power on — skip if radio is already on
+      if (!wasOn) {
+        await this._startupSet('netRemote.sys.power', 1);
+        await this._pollUntil('netRemote.sys.power', (v) => v === '1', 10000);
+      }
+
+      // Step 2: Safety mute in case step 0 was skipped or mute cleared during boot
+      await this._startupSet('netRemote.sys.audio.mute', 1);
+      await this._pollUntil('netRemote.sys.audio.mute', (v) => v === '1', 3000);
+
+      // Step 3: Set source
       await this._startupSet('netRemote.sys.mode', modeInt);
-      await this._delay(1500);
+      await this._pollUntil('netRemote.sys.mode', (v) => parseInt(v, 10) === modeInt, 5000);
 
+      // Step 4: Open nav — fixed 300ms (nav.state is write-only, polling is not meaningful)
       await this._startupSet('netRemote.nav.state', 1);
-      await this._delay(500);
-
-      await this._startupSet('netRemote.nav.action.selectPreset', preset1based - 1);
-
-      await this._api.waitUntilPlaying(10000, 500);
-
-      await this._startupSet('netRemote.nav.state', 0);
       await this._delay(300);
 
-      const max = this._volumeMax();
-      const clamped = Math.max(0, Math.min(Math.round((volumePct / 100) * max), max));
-      await this._startupSet('netRemote.sys.audio.volume', clamped);
+      // Step 5: Select preset, then wait for playback to start
+      await this._startupSet('netRemote.nav.action.selectPreset', preset1based - 1);
+      await this._pollUntil('netRemote.play.status', (v) => v === '2' || v === '3', 10000);
 
+      // Step 6: Close nav state (FS_NODE_BLOCKED silently ignored by _startupSet)
+      await this._startupSet('netRemote.nav.state', 0);
+
+      // Step 7: Set target volume
+      await this._startupSet('netRemote.sys.audio.volume', targetVol);
+      await this._pollUntil('netRemote.sys.audio.volume', (v) => parseInt(v, 10) === targetVol, 3000);
+
+      // Step 8: Unmute now that volume and preset are set
+      await this._startupSet('netRemote.sys.audio.mute', 0);
+      await this._pollUntil('netRemote.sys.audio.mute', (v) => v === '0', 3000);
+
+      // Step 9: Read back confirmed volume and sync Homey tile
       const confirmedVol = await this._api.get('netRemote.sys.audio.volume');
       if (confirmedVol !== null) {
         this._currentVolume = parseInt(confirmedVol, 10);
         await this._syncVolumeCapability(this._currentVolume);
       }
+
+      this._currentPreset = preset1based;
+      await this.setCapabilityValue('onoff', true);
 
     } catch (err) {
       this.error(`turnOnFull sequence failed: ${err.message}`);
@@ -494,6 +524,23 @@ class UndokDevice extends Device {
 
   _delay(ms) {
     return new Promise((resolve) => setTimeout(resolve, ms));
+  }
+
+  // Poll a single node every 300ms (fresh session each time) until predicate(value) is true
+  // or maxMs elapses. null / FS_NODE_BLOCKED readings are skipped — not failures.
+  // Network errors are caught and retried until the deadline.
+  // Returns true if confirmed, false (with log warning) if timed out — never throws.
+  async _pollUntil(node, predicate, maxMs) {
+    const deadline = Date.now() + maxMs;
+    while (Date.now() < deadline) {
+      await this._delay(300);
+      try {
+        const val = await this._api.get(node);
+        if (val !== null && predicate(val)) return true;
+      } catch (_) { /* network error — keep polling until deadline */ }
+    }
+    this.log(`[turnOnFull] ${node} not confirmed within ${maxMs}ms, proceeding`);
+    return false;
   }
 
   // SET during startup; FS_NODE_BLOCKED is silently ignored (radio may still be booting).

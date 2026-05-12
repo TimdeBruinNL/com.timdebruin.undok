@@ -1,5 +1,5 @@
-Bring your internet radio into your smart home. UNDOK connects your Frontier Silicon radio directly to Homey, letting you control it with Flows, voice commands, and automations — no cloud required.
+Bring your Kenwood, Roberts, Ruark, Hama or other UNDOK-compatible internet radio into your smart home. Control it with Flows, voice commands, and automations — no cloud required.
 
-Turn your radio on at sunrise, switch to your favourite station when you get home, or automatically lower the volume when a doorbell rings. Works with any UNDOK-compatible radio on your local network, including brands such as Kenwood, Hama, Revo, Roberts and Ruark.
+Turn your radio on at sunrise, switch to your favourite station when you get home, or automatically lower the volume when a doorbell rings. Works with any Frontier Silicon based radio on your local network.
 
 This app is not affiliated with or endorsed by Frontier Silicon Ltd. UNDOK is a trademark of Frontier Silicon Ltd.

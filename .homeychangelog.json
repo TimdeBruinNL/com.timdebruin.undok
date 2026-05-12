@@ -13,5 +13,8 @@
   },
   "1.1.0": {
     "en": "Batch GET polling for improved performance, configurable poll interval per device (5-60 seconds), volume standardised to percentage (0-100%) throughout the app"
+  },
+  "1.1.1": {
+    "en": "Improved combined Turn On card: confirmation polling, mute during startup to prevent audio bleed. Updated README with region-specific brand mentions."
   }
 }
