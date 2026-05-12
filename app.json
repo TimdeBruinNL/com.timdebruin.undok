@@ -1,6 +1,6 @@
 {
   "id": "com.timdebruin.undok",
-  "version": "1.1.1",
+  "version": "1.2.0",
   "compatibility": ">=12.0.0",
   "sdk": 3,
   "languages": [
@@ -10,10 +10,10 @@
     "fr"
   ],
   "name": {
-    "en": "UNDOK internet radio",
-    "nl": "UNDOK internet radio",
-    "de": "UNDOK Internetradio",
-    "fr": "UNDOK radio internet"
+    "en": "UNDOK / OKTIV Radio",
+    "nl": "UNDOK / OKTIV Radio",
+    "de": "UNDOK / OKTIV Radio",
+    "fr": "UNDOK / OKTIV Radio"
   },
   "description": {
     "en": "Listen smarter, automate your internet radio",
@@ -22,10 +22,10 @@
     "fr": "Écoutez plus intelligemment, automatisez votre radio internet"
   },
   "tags": {
-    "en": ["internet radio", "WiFi radio", "LAN radio", "radio", "DAB", "DAB+", "FM", "streaming", "audio", "music", "UNDOK", "Frontier Silicon", "Kenwood", "Hama", "Sangean", "Roberts", "TechniSat", "Medion", "Revo", "Ruark", "Silvercrest", "Pure", "Sharp", "Teufel"],
-    "nl": ["internetradio", "WiFi radio", "LAN radio", "radio", "DAB", "DAB+", "FM", "streaming", "audio", "muziek", "UNDOK", "Frontier Silicon", "Kenwood", "Hama", "Sangean", "Roberts", "TechniSat", "Medion", "Revo", "Ruark", "Silvercrest", "Pure", "Sharp", "Teufel"],
-    "de": ["Internetradio", "WiFi Radio", "LAN Radio", "Radio", "DAB", "DAB+", "FM", "Streaming", "Audio", "Musik", "UNDOK", "Frontier Silicon", "Kenwood", "Hama", "Sangean", "Roberts", "TechniSat", "Medion", "Revo", "Ruark", "Silvercrest", "Pure", "Sharp", "Teufel"],
-    "fr": ["radio internet", "radio WiFi", "radio LAN", "radio", "DAB", "DAB+", "FM", "streaming", "audio", "musique", "UNDOK", "Frontier Silicon", "Kenwood", "Hama", "Sangean", "Roberts", "TechniSat", "Medion", "Revo", "Ruark", "Silvercrest", "Pure", "Sharp", "Teufel"]
+    "en": ["internet radio", "WiFi radio", "LAN radio", "radio", "DAB", "DAB+", "FM", "streaming", "audio", "music", "UNDOK", "OKTIV", "Frontier Silicon", "Kenwood", "Hama", "Sangean", "Roberts", "TechniSat", "Medion", "Revo", "Ruark", "Silvercrest", "Pure", "Sharp", "Teufel"],
+    "nl": ["internetradio", "WiFi radio", "LAN radio", "radio", "DAB", "DAB+", "FM", "streaming", "audio", "muziek", "UNDOK", "OKTIV", "Frontier Silicon", "Kenwood", "Hama", "Sangean", "Roberts", "TechniSat", "Medion", "Revo", "Ruark", "Silvercrest", "Pure", "Sharp", "Teufel"],
+    "de": ["Internetradio", "WiFi Radio", "LAN Radio", "Radio", "DAB", "DAB+", "FM", "Streaming", "Audio", "Musik", "UNDOK", "OKTIV", "Frontier Silicon", "Kenwood", "Hama", "Sangean", "Roberts", "TechniSat", "Medion", "Revo", "Ruark", "Silvercrest", "Pure", "Sharp", "Teufel"],
+    "fr": ["radio internet", "radio WiFi", "radio LAN", "radio", "DAB", "DAB+", "FM", "streaming", "audio", "musique", "UNDOK", "OKTIV", "Frontier Silicon", "Kenwood", "Hama", "Sangean", "Roberts", "TechniSat", "Medion", "Revo", "Ruark", "Silvercrest", "Pure", "Sharp", "Teufel"]
   },
   "brandColor": "#6a0dad",
   "category": [
@@ -128,10 +128,10 @@
           "fr": "Volume modifié"
         },
         "hint": {
-          "en": "Triggered when the volume changes externally (not via Homey)",
-          "nl": "Geactiveerd wanneer het volume extern wordt gewijzigd (niet via Homey)",
-          "de": "Wird ausgelöst, wenn die Lautstärke extern geändert wird (nicht über Homey)",
-          "fr": "Déclenché lorsque le volume change en dehors de Homey"
+          "en": "Triggered when the volume changes externally (not via Homey). The trigger speed depends on the poll interval configured in the device settings.",
+          "nl": "Geactiveerd wanneer het volume extern wordt gewijzigd (niet via Homey). De triggersnelheid is afhankelijk van de poll interval in de instellingen van dit apparaat.",
+          "de": "Wird ausgelöst, wenn die Lautstärke extern geändert wird (nicht über Homey). Die Auslösegeschwindigkeit hängt vom Abfrageintervall in den Geräteeinstellungen ab.",
+          "fr": "Déclenché lorsque le volume change en dehors de Homey. La vitesse de déclenchement dépend de l'intervalle d'interrogation configuré dans les paramètres de l'appareil."
         },
         "tokens": [
           {
@@ -162,10 +162,10 @@
           "fr": "Préréglage modifié"
         },
         "hint": {
-          "en": "Triggered when the preset changes externally (not via Homey)",
-          "nl": "Geactiveerd wanneer de preset extern wordt gewijzigd (niet via Homey)",
-          "de": "Wird ausgelöst, wenn die Voreinstellung extern geändert wird (nicht über Homey)",
-          "fr": "Déclenché lorsque le préréglage change en dehors de Homey"
+          "en": "Triggered when the preset changes externally (not via Homey). The trigger speed depends on the poll interval configured in the device settings.",
+          "nl": "Geactiveerd wanneer de preset extern wordt gewijzigd (niet via Homey). De triggersnelheid is afhankelijk van de poll interval in de instellingen van dit apparaat.",
+          "de": "Wird ausgelöst, wenn die Voreinstellung extern geändert wird (nicht über Homey). Die Auslösegeschwindigkeit hängt vom Abfrageintervall in den Geräteeinstellungen ab.",
+          "fr": "Déclenché lorsque le préréglage change en dehors de Homey. La vitesse de déclenchement dépend de l'intervalle d'interrogation configuré dans les paramètres de l'appareil."
         },
         "tokens": [
           {
@@ -176,6 +176,60 @@
               "nl": "Preset",
               "de": "Voreinstellung",
               "fr": "Préréglage"
+            }
+          }
+        ],
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=undok-radio"
+          }
+        ]
+      },
+      {
+        "id": "now_playing_changed",
+        "title": {
+          "en": "Now playing changed",
+          "nl": "Nu afspelend gewijzigd",
+          "de": "Aktuelle Wiedergabe geändert",
+          "fr": "Lecture en cours modifiée"
+        },
+        "hint": {
+          "en": "The trigger speed depends on the poll interval configured in the device settings.",
+          "nl": "De triggersnelheid is afhankelijk van de poll interval in de instellingen van dit apparaat.",
+          "de": "Die Auslösegeschwindigkeit hängt vom Abfrageintervall in den Geräteeinstellungen ab.",
+          "fr": "La vitesse de déclenchement dépend de l'intervalle d'interrogation configuré dans les paramètres de l'appareil."
+        },
+        "tokens": [
+          {
+            "name": "station_name",
+            "type": "string",
+            "title": {
+              "en": "Station Name",
+              "nl": "Stationnaam",
+              "de": "Stationsname",
+              "fr": "Nom de la station"
+            }
+          },
+          {
+            "name": "song",
+            "type": "string",
+            "title": {
+              "en": "Song",
+              "nl": "Nummer",
+              "de": "Titel",
+              "fr": "Chanson"
+            }
+          },
+          {
+            "name": "now_playing",
+            "type": "string",
+            "title": {
+              "en": "Now Playing",
+              "nl": "Nu afspelend",
+              "de": "Aktuelle Wiedergabe",
+              "fr": "Lecture en cours"
             }
           }
         ],
@@ -295,6 +349,22 @@
             "min": 0,
             "max": 100,
             "step": 1
+          }
+        ]
+      },
+      {
+        "id": "is_playing",
+        "title": {
+          "en": "!{{Is playing|Is not playing}}",
+          "nl": "!{{Is aan het afspelen|Is niet aan het afspelend}}",
+          "de": "!{{Gibt Ton wieder|Gibt keinen Ton wieder}}",
+          "fr": "!{{Est en lecture|N'est pas en lecture}}"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=undok-radio"
           }
         ]
       },
@@ -452,10 +522,10 @@
     {
       "id": "undok-radio",
       "name": {
-        "en": "UNDOK Radio",
-        "nl": "UNDOK Radio",
-        "de": "UNDOK Radio",
-        "fr": "UNDOK Radio"
+        "en": "UNDOK / OKTIV Radio",
+        "nl": "UNDOK / OKTIV Radio",
+        "de": "UNDOK / OKTIV Radio",
+        "fr": "UNDOK / OKTIV Radio"
       },
       "class": "speaker",
       "icon": "/drivers/undok-radio/assets/icon.svg",

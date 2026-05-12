@@ -42,6 +42,7 @@ class UndokDevice extends Device {
     this._currentSong = '';
     this._radioIsOff = false;
     this._pollActive = false;
+    this._firstPollDone = false;
 
     // Remove capabilities that were renamed or removed in this version
     for (const cap of ['speaker_artist', 'speaker_track', 'source']) {
@@ -187,6 +188,12 @@ class UndokDevice extends Device {
     return max > 0 ? Math.round((this._currentVolume / max) * 100) : 0;
   }
   isMuted() { return this._isMuted; }
+
+  async isPlaying() {
+    this._ensureApi();
+    const val = await this._api.get('netRemote.play.status');
+    return val === '2';
+  }
 
   async setSource(modeInt) {
     this._ensureApi();
@@ -500,6 +507,10 @@ class UndokDevice extends Device {
     }
 
     // ── Now-playing (keep last known value when null = blocked/unavailable) ──
+    const prevStation = this._currentStation;
+    const prevArtist = this._currentArtist;
+    const prevSong = this._currentSong;
+
     if (name !== null) this._currentStation = name;
     if (artist !== null) this._currentArtist = artist;
     if (text !== null) this._currentSong = text;
@@ -508,7 +519,22 @@ class UndokDevice extends Device {
       await this._clearNowPlaying();
     } else {
       await this._updateNowPlaying();
+
+      // Fire now_playing_changed when playing and info changed (skip first poll)
+      if (this._firstPollDone && playStatus === '2') {
+        if (this._currentStation !== prevStation
+          || this._currentArtist !== prevArtist
+          || this._currentSong !== prevSong) {
+          this.driver.triggerNowPlayingChanged(this, {
+            station_name: this.getCapabilityValue('station_name') || '',
+            song: this.getCapabilityValue('song') || '',
+            now_playing: this.getCapabilityValue('now_playing') || '',
+          });
+        }
+      }
     }
+
+    this._firstPollDone = true;
   }
 
   // ── Helpers ──────────────────────────────────────────────────────────────

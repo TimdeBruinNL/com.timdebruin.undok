@@ -16,5 +16,8 @@
   },
   "1.1.1": {
     "en": "Improved combined Turn On card: confirmation polling, mute during startup to prevent audio bleed. Updated README with region-specific brand mentions."
+  },
+  "1.2.0": {
+    "en": "Added OKTIV branding alongside UNDOK throughout the app. Fixed erratic behaviour of combined flow card 'Turn on, source, preset and volume'. Added WHEN card 'Now playing changed'."
   }
 }

@@ -51,7 +51,7 @@ class UndokDriver extends Driver {
       if (!friendlyName && d.friendlyName && d.friendlyName !== `Radio (${d.ip})`) {
         friendlyName = d.friendlyName;
       }
-      if (!friendlyName) friendlyName = 'UNDOK Radio';
+      if (!friendlyName) friendlyName = 'UNDOK / OKTIV Radio';
 
       devices.push({
         name: fsapiNameOk ? friendlyName : `${friendlyName} (${d.ip})`,
@@ -68,6 +68,7 @@ class UndokDriver extends Driver {
     // ── Triggers ─────────────────────────────────────────────────────────────
     this._triggerVolumeChanged = this.homey.flow.getDeviceTriggerCard('volume_changed');
     this._triggerPresetChanged = this.homey.flow.getDeviceTriggerCard('preset_changed');
+    this._triggerNowPlayingChanged = this.homey.flow.getDeviceTriggerCard('now_playing_changed');
 
     // ── Conditions ───────────────────────────────────────────────────────────
     this.homey.flow.getConditionCard('preset_condition')
@@ -81,6 +82,9 @@ class UndokDriver extends Driver {
         if (operator === 'lt') return current < volume;
         return false;
       });
+
+    this.homey.flow.getConditionCard('is_playing')
+      .registerRunListener(async ({ device }) => device.isPlaying());
 
     this.homey.flow.getConditionCard('is_muted')
       .registerRunListener(async ({ device }) => device.isMuted());
@@ -114,6 +118,7 @@ class UndokDriver extends Driver {
 
   triggerVolumeChanged(device, volume) { return this._triggerVolumeChanged.trigger(device, { volume }, {}); }
   triggerPresetChanged(device, preset) { return this._triggerPresetChanged.trigger(device, { preset }, {}); }
+  triggerNowPlayingChanged(device, tokens) { return this._triggerNowPlayingChanged.trigger(device, tokens, {}); }
 }
 
 module.exports = UndokDriver;
