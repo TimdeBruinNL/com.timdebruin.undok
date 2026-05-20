@@ -19,5 +19,8 @@
   },
   "1.2.0": {
     "en": "Added OKTIV branding alongside UNDOK throughout the app. Fixed erratic behaviour of combined flow card 'Turn on, source, preset and volume'. Added WHEN card 'Now playing changed'."
+  },
+  "1.2.1": {
+    "en": "Minor text changes. Added donate link."
   }
 }

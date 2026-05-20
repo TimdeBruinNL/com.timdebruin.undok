@@ -1,6 +1,6 @@
 {
   "id": "com.timdebruin.undok",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "compatibility": ">=12.0.0",
   "sdk": 3,
   "languages": [
@@ -39,6 +39,9 @@
     "url": "https://community.homey.app/t/undok-control-your-frontier-silicon-internet-radio-with-homey/154664"
   },
   "homeyCommunityTopicId": 154664,
+  "donate": {
+    "paypal": "https://paypal.me/TimdeBruin"
+  },
   "source": "https://github.com/TimdeBruinNL/com.timdebruin.undok",
   "images": {
     "small": "/assets/images/small.png",
