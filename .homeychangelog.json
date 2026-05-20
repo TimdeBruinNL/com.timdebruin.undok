@@ -22,5 +22,8 @@
   },
   "1.2.1": {
     "en": "Minor text changes. Added donate link."
+  },
+  "1.2.2": {
+    "en": "Fixed donate link."
   }
 }
