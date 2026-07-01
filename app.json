@@ -1,6 +1,6 @@
 {
   "id": "com.timdebruin.undok",
-  "version": "1.2.2",
+  "version": "1.3.0",
   "compatibility": ">=12.0.0",
   "sdk": 3,
   "languages": [
@@ -156,7 +156,7 @@
           {
             "type": "device",
             "name": "device",
-            "filter": "driver_id=undok-radio"
+            "filter": "driver_id=undok-radio|driver_id=undok-radio-manual"
           }
         ]
       },
@@ -190,7 +190,7 @@
           {
             "type": "device",
             "name": "device",
-            "filter": "driver_id=undok-radio"
+            "filter": "driver_id=undok-radio|driver_id=undok-radio-manual"
           }
         ]
       },
@@ -244,7 +244,7 @@
           {
             "type": "device",
             "name": "device",
-            "filter": "driver_id=undok-radio"
+            "filter": "driver_id=undok-radio|driver_id=undok-radio-manual"
           }
         ]
       }
@@ -268,7 +268,7 @@
           {
             "type": "device",
             "name": "device",
-            "filter": "driver_id=undok-radio"
+            "filter": "driver_id=undok-radio|driver_id=undok-radio-manual"
           },
           {
             "type": "number",
@@ -303,7 +303,7 @@
           {
             "type": "device",
             "name": "device",
-            "filter": "driver_id=undok-radio"
+            "filter": "driver_id=undok-radio|driver_id=undok-radio-manual"
           },
           {
             "type": "dropdown",
@@ -371,7 +371,7 @@
           {
             "type": "device",
             "name": "device",
-            "filter": "driver_id=undok-radio"
+            "filter": "driver_id=undok-radio|driver_id=undok-radio-manual"
           }
         ]
       },
@@ -387,7 +387,7 @@
           {
             "type": "device",
             "name": "device",
-            "filter": "driver_id=undok-radio"
+            "filter": "driver_id=undok-radio|driver_id=undok-radio-manual"
           }
         ]
       }
@@ -411,7 +411,7 @@
           {
             "type": "device",
             "name": "device",
-            "filter": "driver_id=undok-radio"
+            "filter": "driver_id=undok-radio|driver_id=undok-radio-manual"
           },
           {
             "type": "autocomplete",
@@ -443,7 +443,7 @@
           {
             "type": "device",
             "name": "device",
-            "filter": "driver_id=undok-radio"
+            "filter": "driver_id=undok-radio|driver_id=undok-radio-manual"
           },
           {
             "type": "number",
@@ -477,7 +477,7 @@
           {
             "type": "device",
             "name": "device",
-            "filter": "driver_id=undok-radio"
+            "filter": "driver_id=undok-radio|driver_id=undok-radio-manual"
           },
           {
             "type": "autocomplete",
@@ -529,10 +529,10 @@
     {
       "id": "undok-radio",
       "name": {
-        "en": "UNDOK / OKTIV Radio",
-        "nl": "UNDOK / OKTIV Radio",
-        "de": "UNDOK / OKTIV Radio",
-        "fr": "UNDOK / OKTIV Radio"
+        "en": "Radio",
+        "nl": "Radio",
+        "de": "Radio",
+        "fr": "Radio"
       },
       "class": "speaker",
       "icon": "/drivers/undok-radio/assets/icon.svg",
@@ -579,6 +579,88 @@
         {
           "id": "add_devices",
           "template": "add_devices"
+        }
+      ],
+      "settings": [
+        {
+          "id": "pin",
+          "type": "text",
+          "label": {
+            "en": "PIN code",
+            "nl": "Pincode",
+            "de": "PIN-Code",
+            "fr": "Code PIN"
+          },
+          "value": "1234"
+        },
+        {
+          "id": "poll_interval",
+          "type": "number",
+          "label": {
+            "en": "Poll interval",
+            "nl": "Poll interval",
+            "de": "Abfrageintervall",
+            "fr": "Intervalle d'interrogation"
+          },
+          "value": 10,
+          "min": 5,
+          "max": 60,
+          "step": 1,
+          "units": "s",
+          "hint": {
+            "en": "How often Homey checks the radio status. Lower values are more responsive but use more resources.",
+            "nl": "Hoe vaak Homey de radiostatus controleert. Lagere waarden zijn responsiever maar verbruiken meer middelen.",
+            "de": "Wie oft Homey den Radiostatus prüft. Niedrigere Werte reagieren schneller, verbrauchen aber mehr Ressourcen.",
+            "fr": "La fréquence à laquelle Homey vérifie l'état de la radio. Des valeurs plus faibles sont plus réactives mais consomment plus de ressources."
+          }
+        }
+      ]
+    },
+    {
+      "id": "undok-radio-manual",
+      "name": {
+        "en": "Radio (manual adding)",
+        "nl": "Radio (handmatig toevoegen)",
+        "de": "Radio (manuell hinzufügen)",
+        "fr": "Radio (ajout manuel)"
+      },
+      "class": "speaker",
+      "icon": "/drivers/undok-radio-manual/assets/icon.svg",
+      "capabilities": [
+        "onoff",
+        "input_source",
+        "volume_set",
+        "volume_down",
+        "volume_up",
+        "volume_mute",
+        "speaker_prev",
+        "speaker_playing",
+        "speaker_next",
+        "station_name",
+        "song",
+        "now_playing"
+      ],
+      "capabilitiesOptions": {
+        "volume_set": {
+          "title": {
+            "en": "Volume",
+            "nl": "Volume",
+            "de": "Lautstärke",
+            "fr": "Volume"
+          },
+          "min": 0,
+          "max": 1,
+          "step": 0.01
+        }
+      },
+      "images": {
+        "small": "/drivers/undok-radio-manual/assets/images/small.png",
+        "large": "/drivers/undok-radio-manual/assets/images/large.png",
+        "xlarge": "/drivers/undok-radio-manual/assets/images/xlarge.png"
+      },
+      "pair": [
+        {
+          "id": "manual_add"
         }
       ],
       "settings": [

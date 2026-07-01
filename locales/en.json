@@ -2,5 +2,16 @@
   "flow": {
     "error_not_on": "Radio is not turned on",
     "error_timeout": "Radio did not reach playing state within 10 seconds"
+  },
+  "pair": {
+    "manual_add": {
+      "title": "Add radio manually",
+      "hint": "Enter the IP address and PIN code of the radio.",
+      "ip_label": "IP address",
+      "pin_label": "PIN code",
+      "connect_button": "Connect",
+      "error": "Could not connect to the radio. Check the IP address and PIN code.",
+      "ip_note": "Tip: assign a fixed IP address to your radio in your router settings to prevent connection issues after a restart."
+    }
   }
 }

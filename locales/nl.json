@@ -2,5 +2,16 @@
   "flow": {
     "error_not_on": "Radio staat niet aan",
     "error_timeout": "Radio heeft de afspeelstatus niet bereikt binnen 10 seconden"
+  },
+  "pair": {
+    "manual_add": {
+      "title": "Radio handmatig toevoegen",
+      "hint": "Voer het IP-adres en de pincode van de radio in.",
+      "ip_label": "IP-adres",
+      "pin_label": "Pincode",
+      "connect_button": "Verbinden",
+      "error": "Kan geen verbinding maken met de radio. Controleer het IP-adres en de pincode.",
+      "ip_note": "Tip: wijs een vast IP-adres toe aan de radio in de instellingen van je router om verbindingsproblemen na een herstart te voorkomen."
+    }
   }
 }

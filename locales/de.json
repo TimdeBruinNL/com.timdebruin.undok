@@ -2,5 +2,16 @@
   "flow": {
     "error_not_on": "Radio ist nicht eingeschaltet",
     "error_timeout": "Das Radio hat den Wiedergabestatus nicht innerhalb von 10 Sekunden erreicht"
+  },
+  "pair": {
+    "manual_add": {
+      "title": "Radio manuell hinzufügen",
+      "hint": "Geben Sie die IP-Adresse und den PIN-Code des Radios ein.",
+      "ip_label": "IP-Adresse",
+      "pin_label": "PIN-Code",
+      "connect_button": "Verbinden",
+      "error": "Verbindung zum Radio nicht möglich. Überprüfen Sie die IP-Adresse und den PIN-Code.",
+      "ip_note": "Tipp: Weisen Sie Ihrem Radio in den Router-Einstellungen eine feste IP-Adresse zu, um Verbindungsprobleme nach einem Neustart zu vermeiden."
+    }
   }
 }

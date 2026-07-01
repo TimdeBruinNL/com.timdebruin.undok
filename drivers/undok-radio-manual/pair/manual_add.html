@@ -1,0 +1,95 @@
+<header class="homey-header">
+  <h1 class="homey-title">Add radio manually</h1>
+</header>
+
+<p id="status" class="homey-subtitle">Enter the IP address and PIN of your radio.</p>
+
+<div class="homey-form">
+  <div class="homey-form-group">
+    <label class="homey-form-label" for="ip">IP address</label>
+    <input class="homey-form-input" id="ip" type="text" placeholder="192.168.1.100"
+           autocomplete="off" oninput="window._ip=this.value" onchange="window._ip=this.value" />
+  </div>
+  <div class="homey-form-group">
+    <label class="homey-form-label" for="pin">PIN code</label>
+    <input class="homey-form-input" id="pin" type="text" value="1234"
+           autocomplete="off" oninput="window._pin=this.value" onchange="window._pin=this.value" />
+  </div>
+</div>
+
+<button class="homey-button-primary-full" type="button" id="btn" onclick="handleBtn()">Connect</button>
+
+<p class="homey-subtitle" style="margin-top:8px;">Tip: assign a fixed IP address to your radio in your router settings.</p>
+
+<script>
+  if (window._ip  === undefined) window._ip  = '';
+  if (window._pin === undefined) window._pin = '1234';
+
+  function setStatus(msg) {
+    var el = document.getElementById('status');
+    if (el) el.textContent = msg;
+  }
+  function setBtnDisabled(v) {
+    var el = document.getElementById('btn');
+    if (el) el.disabled = v;
+  }
+
+  function addDevice(ip, pin, name, volumeSteps) {
+    setStatus('Adding ' + name + '…');
+    Homey.createDevice({
+      name: name,
+      data: { id: ip },
+      store: { ip: ip, friendlyName: name, volumeSteps: volumeSteps || 32, modeMap: {} },
+      settings: { pin: pin },
+    })
+    .then(function () { setStatus('Radio added!'); setTimeout(function () { Homey.done(); }, 1000); })
+    .catch(function (err) {
+      setStatus((err && err.message) ? err.message : 'Failed to add radio.');
+      setBtnDisabled(false);
+    });
+  }
+
+  window.handleBtn = function () {
+    var ip  = (window._ip  || '').trim();
+    var pin = (window._pin || '1234').trim() || '1234';
+
+    if (!ip) { setStatus('Please enter an IP address.'); return; }
+
+    setStatus('Connecting…');
+    setBtnDisabled(true);
+
+    var done = false;
+
+    // Fallback: if emit never resolves, create device with defaults after 8 s
+    var fallback = setTimeout(function () {
+      if (done) return;
+      done = true;
+      addDevice(ip, pin, 'UNDOK Radio (' + ip + ')', 32);
+    }, 8000);
+
+    function onResult(err, result) {
+      if (done) return;
+      done = true;
+      clearTimeout(fallback);
+      if (err) { setStatus(err.message || String(err)); setBtnDisabled(false); return; }
+      if (result && result.error) { setStatus(result.error); setBtnDisabled(false); return; }
+      addDevice(ip, pin, (result && result.name) || 'UNDOK Radio (' + ip + ')', (result && result.volumeSteps) || 32);
+    }
+
+    try {
+      // Callback style (SDK v2 compat) AND promise style (SDK v3)
+      var p = Homey.emit('pair_radio', { ip: ip, pin: pin }, function (err, res) { onResult(err, res); });
+      if (p && typeof p.then === 'function') {
+        p.then(function (r) { onResult(null, r); }).catch(function (e) { onResult(e, null); });
+      }
+    } catch (e) {
+      onResult(e, null);
+    }
+  };
+
+  // Signal readiness to the pair wizard exactly once
+  if (!window._pairReady) {
+    window._pairReady = true;
+    try { Homey.ready(); } catch (_) {}
+  }
+</script>

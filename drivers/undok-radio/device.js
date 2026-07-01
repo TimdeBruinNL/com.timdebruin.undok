@@ -644,9 +644,37 @@ class UndokDevice extends Device {
     if (storedIp) {
       this._lastKnownIp = storedIp;
       this._createApi(storedIp);
+      await this._fetchMissingStoreValues();
       return;
     }
     await this._tryRediscover();
+  }
+
+  async _fetchMissingStoreValues() {
+    const modeMap = this.getStoreValue('modeMap') || {};
+    const hasModeMap = Object.keys(modeMap).length > 0;
+    const hasVolumeSteps = (this.getStoreValue('volumeSteps') || 0) > 1;
+
+    if (hasModeMap && hasVolumeSteps) return;
+
+    try {
+      if (!hasVolumeSteps) {
+        const vs = await this._api.get('netRemote.sys.caps.volumeSteps');
+        if (vs) {
+          const steps = parseInt(vs, 10);
+          if (!isNaN(steps) && steps > 1) await this.setStoreValue('volumeSteps', steps);
+        }
+      }
+      if (!hasModeMap) {
+        const newMap = await this._api.listGetAll('netRemote.sys.caps.validModes');
+        if (newMap && Object.keys(newMap).length > 0) {
+          await this.setStoreValue('modeMap', newMap);
+          await this._initInputSourceOptions();
+        }
+      }
+    } catch (err) {
+      this.error(`Could not fetch missing store values on init: ${err.message}`);
+    }
   }
 
   async _tryRediscover() {

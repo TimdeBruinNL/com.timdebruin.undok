@@ -2,5 +2,16 @@
   "flow": {
     "error_not_on": "La radio n'est pas allumée",
     "error_timeout": "La radio n'a pas atteint l'état de lecture dans les 10 secondes"
+  },
+  "pair": {
+    "manual_add": {
+      "title": "Ajouter la radio manuellement",
+      "hint": "Entrez l'adresse IP et le code PIN de la radio.",
+      "ip_label": "Adresse IP",
+      "pin_label": "Code PIN",
+      "connect_button": "Connecter",
+      "error": "Impossible de se connecter à la radio. Vérifiez l'adresse IP et le code PIN.",
+      "ip_note": "Conseil : attribuez une adresse IP fixe à votre radio dans les paramètres de votre routeur pour éviter les problèmes de connexion après un redémarrage."
+    }
   }
 }
