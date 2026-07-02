@@ -1,6 +1,6 @@
 {
   "id": "com.timdebruin.undok",
-  "version": "1.3.0",
+  "version": "1.3.1",
   "compatibility": ">=12.0.0",
   "sdk": 3,
   "languages": [
@@ -22,10 +22,114 @@
     "fr": "Écoutez plus intelligemment, automatisez votre radio internet"
   },
   "tags": {
-    "en": ["internet radio", "WiFi radio", "LAN radio", "radio", "DAB", "DAB+", "FM", "streaming", "audio", "music", "UNDOK", "OKTIV", "Frontier Silicon", "Kenwood", "Hama", "Sangean", "Roberts", "TechniSat", "Medion", "Revo", "Ruark", "Silvercrest", "Pure", "Sharp", "Teufel"],
-    "nl": ["internetradio", "WiFi radio", "LAN radio", "radio", "DAB", "DAB+", "FM", "streaming", "audio", "muziek", "UNDOK", "OKTIV", "Frontier Silicon", "Kenwood", "Hama", "Sangean", "Roberts", "TechniSat", "Medion", "Revo", "Ruark", "Silvercrest", "Pure", "Sharp", "Teufel"],
-    "de": ["Internetradio", "WiFi Radio", "LAN Radio", "Radio", "DAB", "DAB+", "FM", "Streaming", "Audio", "Musik", "UNDOK", "OKTIV", "Frontier Silicon", "Kenwood", "Hama", "Sangean", "Roberts", "TechniSat", "Medion", "Revo", "Ruark", "Silvercrest", "Pure", "Sharp", "Teufel"],
-    "fr": ["radio internet", "radio WiFi", "radio LAN", "radio", "DAB", "DAB+", "FM", "streaming", "audio", "musique", "UNDOK", "OKTIV", "Frontier Silicon", "Kenwood", "Hama", "Sangean", "Roberts", "TechniSat", "Medion", "Revo", "Ruark", "Silvercrest", "Pure", "Sharp", "Teufel"]
+    "en": [
+      "internet radio",
+      "WiFi radio",
+      "LAN radio",
+      "radio",
+      "DAB",
+      "DAB+",
+      "FM",
+      "streaming",
+      "audio",
+      "music",
+      "UNDOK",
+      "OKTIV",
+      "Frontier Silicon",
+      "Kenwood",
+      "Hama",
+      "Sangean",
+      "Roberts",
+      "TechniSat",
+      "Medion",
+      "Revo",
+      "Ruark",
+      "Silvercrest",
+      "Pure",
+      "Sharp",
+      "Teufel"
+    ],
+    "nl": [
+      "internetradio",
+      "WiFi radio",
+      "LAN radio",
+      "radio",
+      "DAB",
+      "DAB+",
+      "FM",
+      "streaming",
+      "audio",
+      "muziek",
+      "UNDOK",
+      "OKTIV",
+      "Frontier Silicon",
+      "Kenwood",
+      "Hama",
+      "Sangean",
+      "Roberts",
+      "TechniSat",
+      "Medion",
+      "Revo",
+      "Ruark",
+      "Silvercrest",
+      "Pure",
+      "Sharp",
+      "Teufel"
+    ],
+    "de": [
+      "Internetradio",
+      "WiFi Radio",
+      "LAN Radio",
+      "Radio",
+      "DAB",
+      "DAB+",
+      "FM",
+      "Streaming",
+      "Audio",
+      "Musik",
+      "UNDOK",
+      "OKTIV",
+      "Frontier Silicon",
+      "Kenwood",
+      "Hama",
+      "Sangean",
+      "Roberts",
+      "TechniSat",
+      "Medion",
+      "Revo",
+      "Ruark",
+      "Silvercrest",
+      "Pure",
+      "Sharp",
+      "Teufel"
+    ],
+    "fr": [
+      "radio internet",
+      "radio WiFi",
+      "radio LAN",
+      "radio",
+      "DAB",
+      "DAB+",
+      "FM",
+      "streaming",
+      "audio",
+      "musique",
+      "UNDOK",
+      "OKTIV",
+      "Frontier Silicon",
+      "Kenwood",
+      "Hama",
+      "Sangean",
+      "Roberts",
+      "TechniSat",
+      "Medion",
+      "Revo",
+      "Ruark",
+      "Silvercrest",
+      "Pure",
+      "Sharp",
+      "Teufel"
+    ]
   },
   "brandColor": "#6a0dad",
   "category": [
@@ -156,7 +260,41 @@
           {
             "type": "device",
             "name": "device",
-            "filter": "driver_id=undok-radio|driver_id=undok-radio-manual"
+            "filter": "driver_id=undok-radio"
+          }
+        ]
+      },
+      {
+        "id": "volume_changed_manual",
+        "title": {
+          "en": "Volume changed",
+          "nl": "Volume veranderd",
+          "de": "Lautstärke geändert",
+          "fr": "Volume modifié"
+        },
+        "hint": {
+          "en": "Triggered when the volume changes externally (not via Homey). The trigger speed depends on the poll interval configured in the device settings.",
+          "nl": "Geactiveerd wanneer het volume extern wordt gewijzigd (niet via Homey). De triggersnelheid is afhankelijk van de poll interval in de instellingen van dit apparaat.",
+          "de": "Wird ausgelöst, wenn die Lautstärke extern geändert wird (nicht über Homey). Die Auslösegeschwindigkeit hängt vom Abfrageintervall in den Geräteeinstellungen ab.",
+          "fr": "Déclenché lorsque le volume change en dehors de Homey. La vitesse de déclenchement dépend de l'intervalle d'interrogation configuré dans les paramètres de l'appareil."
+        },
+        "tokens": [
+          {
+            "name": "volume",
+            "type": "number",
+            "title": {
+              "en": "Volume",
+              "nl": "Volume",
+              "de": "Lautstärke",
+              "fr": "Volume"
+            }
+          }
+        ],
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=undok-radio-manual"
           }
         ]
       },
@@ -190,7 +328,41 @@
           {
             "type": "device",
             "name": "device",
-            "filter": "driver_id=undok-radio|driver_id=undok-radio-manual"
+            "filter": "driver_id=undok-radio"
+          }
+        ]
+      },
+      {
+        "id": "preset_changed_manual",
+        "title": {
+          "en": "Preset changed",
+          "nl": "Preset gewijzigd",
+          "de": "Voreinstellung geändert",
+          "fr": "Préréglage modifié"
+        },
+        "hint": {
+          "en": "Triggered when the preset changes externally (not via Homey). The trigger speed depends on the poll interval configured in the device settings.",
+          "nl": "Geactiveerd wanneer de preset extern wordt gewijzigd (niet via Homey). De triggersnelheid is afhankelijk van de poll interval in de instellingen van dit apparaat.",
+          "de": "Wird ausgelöst, wenn die Voreinstellung extern geändert wird (nicht über Homey). Die Auslösegeschwindigkeit hängt vom Abfrageintervall in den Geräteeinstellungen ab.",
+          "fr": "Déclenché lorsque le préréglage change en dehors de Homey. La vitesse de déclenchement dépend de l'intervalle d'interrogation configuré dans les paramètres de l'appareil."
+        },
+        "tokens": [
+          {
+            "name": "preset",
+            "type": "number",
+            "title": {
+              "en": "Preset",
+              "nl": "Preset",
+              "de": "Voreinstellung",
+              "fr": "Préréglage"
+            }
+          }
+        ],
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=undok-radio-manual"
           }
         ]
       },
@@ -244,7 +416,61 @@
           {
             "type": "device",
             "name": "device",
-            "filter": "driver_id=undok-radio|driver_id=undok-radio-manual"
+            "filter": "driver_id=undok-radio"
+          }
+        ]
+      },
+      {
+        "id": "now_playing_changed_manual",
+        "title": {
+          "en": "Now playing changed",
+          "nl": "Nu afspelend gewijzigd",
+          "de": "Aktuelle Wiedergabe geändert",
+          "fr": "Lecture en cours modifiée"
+        },
+        "hint": {
+          "en": "The trigger speed depends on the poll interval configured in the device settings.",
+          "nl": "De triggersnelheid is afhankelijk van de poll interval in de instellingen van dit apparaat.",
+          "de": "Die Auslösegeschwindigkeit hängt vom Abfrageintervall in den Geräteeinstellungen ab.",
+          "fr": "La vitesse de déclenchement dépend de l'intervalle d'interrogation configuré dans les paramètres de l'appareil."
+        },
+        "tokens": [
+          {
+            "name": "station_name",
+            "type": "string",
+            "title": {
+              "en": "Station Name",
+              "nl": "Stationnaam",
+              "de": "Stationsname",
+              "fr": "Nom de la station"
+            }
+          },
+          {
+            "name": "song",
+            "type": "string",
+            "title": {
+              "en": "Song",
+              "nl": "Nummer",
+              "de": "Titel",
+              "fr": "Chanson"
+            }
+          },
+          {
+            "name": "now_playing",
+            "type": "string",
+            "title": {
+              "en": "Now Playing",
+              "nl": "Nu afspelend",
+              "de": "Aktuelle Wiedergabe",
+              "fr": "Lecture en cours"
+            }
+          }
+        ],
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=undok-radio-manual"
           }
         ]
       }
@@ -268,7 +494,42 @@
           {
             "type": "device",
             "name": "device",
-            "filter": "driver_id=undok-radio|driver_id=undok-radio-manual"
+            "filter": "driver_id=undok-radio"
+          },
+          {
+            "type": "number",
+            "name": "preset",
+            "title": {
+              "en": "Preset",
+              "nl": "Preset",
+              "de": "Voreinstellung",
+              "fr": "Préréglage"
+            },
+            "min": 1,
+            "max": 99,
+            "step": 1
+          }
+        ]
+      },
+      {
+        "id": "preset_condition_manual",
+        "title": {
+          "en": "Current preset !{{is equal to|is not equal to}} [[preset]]",
+          "nl": "Huidige preset !{{is gelijk aan|is niet gelijk aan}} [[preset]]",
+          "de": "Aktuelle Voreinstellung !{{ist gleich|ist nicht gleich}} [[preset]]",
+          "fr": "Préréglage actuel !{{est égal à|n'est pas égal à}} [[preset]]"
+        },
+        "titleFormatted": {
+          "en": "Current preset !{{is equal to|is not equal to}} [[preset]]",
+          "nl": "Huidige preset !{{is gelijk aan|is niet gelijk aan}} [[preset]]",
+          "de": "Aktuelle Voreinstellung !{{ist gleich|ist nicht gleich}} [[preset]]",
+          "fr": "Préréglage actuel !{{est égal à|n'est pas égal à}} [[preset]]"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=undok-radio-manual"
           },
           {
             "type": "number",
@@ -303,7 +564,81 @@
           {
             "type": "device",
             "name": "device",
-            "filter": "driver_id=undok-radio|driver_id=undok-radio-manual"
+            "filter": "driver_id=undok-radio"
+          },
+          {
+            "type": "dropdown",
+            "name": "operator",
+            "title": {
+              "en": "Operator",
+              "nl": "Operator",
+              "de": "Operator",
+              "fr": "Opérateur"
+            },
+            "values": [
+              {
+                "id": "eq",
+                "label": {
+                  "en": "equal to",
+                  "nl": "gelijk aan",
+                  "de": "gleich",
+                  "fr": "égal à"
+                }
+              },
+              {
+                "id": "gt",
+                "label": {
+                  "en": "greater than",
+                  "nl": "groter dan",
+                  "de": "größer als",
+                  "fr": "supérieur à"
+                }
+              },
+              {
+                "id": "lt",
+                "label": {
+                  "en": "less than",
+                  "nl": "kleiner dan",
+                  "de": "kleiner als",
+                  "fr": "inférieur à"
+                }
+              }
+            ]
+          },
+          {
+            "type": "number",
+            "name": "volume",
+            "title": {
+              "en": "Volume",
+              "nl": "Volume",
+              "de": "Lautstärke",
+              "fr": "Volume"
+            },
+            "min": 0,
+            "max": 100,
+            "step": 1
+          }
+        ]
+      },
+      {
+        "id": "volume_condition_manual",
+        "title": {
+          "en": "Current volume !{{is|is not}} [[operator]] [[volume]]",
+          "nl": "Huidig volume !{{is|is niet}} [[operator]] [[volume]]",
+          "de": "Aktuelle Lautstärke !{{ist|ist nicht}} [[operator]] [[volume]]",
+          "fr": "Volume actuel !{{est|n'est pas}} [[operator]] [[volume]]"
+        },
+        "titleFormatted": {
+          "en": "Current volume !{{is|is not}} [[operator]] [[volume]]",
+          "nl": "Huidig volume !{{is|is niet}} [[operator]] [[volume]]",
+          "de": "Aktuelle Lautstärke !{{ist|ist nicht}} [[operator]] [[volume]]",
+          "fr": "Volume actuel !{{est|n'est pas}} [[operator]] [[volume]]"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=undok-radio-manual"
           },
           {
             "type": "dropdown",
@@ -371,7 +706,23 @@
           {
             "type": "device",
             "name": "device",
-            "filter": "driver_id=undok-radio|driver_id=undok-radio-manual"
+            "filter": "driver_id=undok-radio"
+          }
+        ]
+      },
+      {
+        "id": "is_playing_manual",
+        "title": {
+          "en": "!{{Is playing|Is not playing}}",
+          "nl": "!{{Is aan het afspelen|Is niet aan het afspelend}}",
+          "de": "!{{Gibt Ton wieder|Gibt keinen Ton wieder}}",
+          "fr": "!{{Est en lecture|N'est pas en lecture}}"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=undok-radio-manual"
           }
         ]
       },
@@ -387,7 +738,23 @@
           {
             "type": "device",
             "name": "device",
-            "filter": "driver_id=undok-radio|driver_id=undok-radio-manual"
+            "filter": "driver_id=undok-radio"
+          }
+        ]
+      },
+      {
+        "id": "is_muted_manual",
+        "title": {
+          "en": "Radio !{{is|is not}} muted",
+          "nl": "Radio !{{is|is niet}} gedempt",
+          "de": "Radio !{{ist|ist nicht}} stummgeschaltet",
+          "fr": "La radio !{{est|n'est pas}} en mode silencieux"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=undok-radio-manual"
           }
         ]
       }
@@ -411,7 +778,39 @@
           {
             "type": "device",
             "name": "device",
-            "filter": "driver_id=undok-radio|driver_id=undok-radio-manual"
+            "filter": "driver_id=undok-radio"
+          },
+          {
+            "type": "autocomplete",
+            "name": "source",
+            "title": {
+              "en": "Source",
+              "nl": "Bron",
+              "de": "Quelle",
+              "fr": "Source"
+            }
+          }
+        ]
+      },
+      {
+        "id": "select_source_manual",
+        "title": {
+          "en": "Select source",
+          "nl": "Selecteer bron",
+          "de": "Quelle auswählen",
+          "fr": "Sélectionner la source"
+        },
+        "titleFormatted": {
+          "en": "Select source [[source]]",
+          "nl": "Selecteer bron [[source]]",
+          "de": "Quelle auswählen [[source]]",
+          "fr": "Sélectionner la source [[source]]"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=undok-radio-manual"
           },
           {
             "type": "autocomplete",
@@ -443,7 +842,41 @@
           {
             "type": "device",
             "name": "device",
-            "filter": "driver_id=undok-radio|driver_id=undok-radio-manual"
+            "filter": "driver_id=undok-radio"
+          },
+          {
+            "type": "number",
+            "name": "preset",
+            "title": {
+              "en": "Preset",
+              "nl": "Preset",
+              "de": "Voreinstellung",
+              "fr": "Préréglage"
+            },
+            "min": 1,
+            "step": 1
+          }
+        ]
+      },
+      {
+        "id": "select_preset_manual",
+        "title": {
+          "en": "Select preset",
+          "nl": "Selecteer preset",
+          "de": "Voreinstellung auswählen",
+          "fr": "Sélectionner le préréglage"
+        },
+        "titleFormatted": {
+          "en": "Select preset [[preset]]",
+          "nl": "Selecteer preset [[preset]]",
+          "de": "Voreinstellung auswählen [[preset]]",
+          "fr": "Sélectionner le préréglage [[preset]]"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=undok-radio-manual"
           },
           {
             "type": "number",
@@ -477,7 +910,71 @@
           {
             "type": "device",
             "name": "device",
-            "filter": "driver_id=undok-radio|driver_id=undok-radio-manual"
+            "filter": "driver_id=undok-radio"
+          },
+          {
+            "type": "autocomplete",
+            "name": "source",
+            "title": {
+              "en": "Source",
+              "nl": "Bron",
+              "de": "Quelle",
+              "fr": "Source"
+            }
+          },
+          {
+            "type": "number",
+            "name": "preset",
+            "title": {
+              "en": "Preset",
+              "nl": "Preset",
+              "de": "Voreinstellung",
+              "fr": "Préréglage"
+            },
+            "min": 1,
+            "step": 1
+          },
+          {
+            "type": "number",
+            "name": "volume",
+            "title": {
+              "en": "Volume",
+              "nl": "Volume",
+              "de": "Lautstärke",
+              "fr": "Volume"
+            },
+            "min": 0,
+            "max": 100,
+            "step": 1,
+            "suffix": "%",
+            "hint": {
+              "en": "Volume level (0-100%)",
+              "nl": "Volumeniveau (0-100%)",
+              "de": "Lautstärkepegel (0-100 %)",
+              "fr": "Niveau de volume (0-100 %)"
+            }
+          }
+        ]
+      },
+      {
+        "id": "turn_on_full_manual",
+        "title": {
+          "en": "Turn on, select source, preset, and volume",
+          "nl": "Zet aan, selecteer bron, preset en volume",
+          "de": "Einschalten, Quelle, Voreinstellung und Lautstärke wählen",
+          "fr": "Allumer, sélectionner la source, le préréglage et le volume"
+        },
+        "titleFormatted": {
+          "en": "Turn on, source [[source]], preset [[preset]], volume [[volume]]%",
+          "nl": "Zet aan, bron [[source]], preset [[preset]], volume [[volume]]%",
+          "de": "Einschalten, Quelle [[source]], Voreinstellung [[preset]], Lautstärke [[volume]]%",
+          "fr": "Allumer, source [[source]], préréglage [[preset]], volume [[volume]]%"
+        },
+        "args": [
+          {
+            "type": "device",
+            "name": "device",
+            "filter": "driver_id=undok-radio-manual"
           },
           {
             "type": "autocomplete",

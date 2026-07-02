@@ -5,6 +5,53 @@ const UndokDriver = require('../undok-radio/driver');
 
 class ManualDriver extends UndokDriver {
 
+  _registerFlowCards() {
+    this._triggerVolumeChanged = this.homey.flow.getDeviceTriggerCard('volume_changed_manual');
+    this._triggerPresetChanged = this.homey.flow.getDeviceTriggerCard('preset_changed_manual');
+    this._triggerNowPlayingChanged = this.homey.flow.getDeviceTriggerCard('now_playing_changed_manual');
+
+    this.homey.flow.getConditionCard('preset_condition_manual')
+      .registerRunListener(async ({ device, preset }) => device.getCurrentPreset() === preset);
+
+    this.homey.flow.getConditionCard('volume_condition_manual')
+      .registerRunListener(async ({ device, operator, volume }) => {
+        const current = device.getCurrentVolume();
+        if (operator === 'eq') return current === volume;
+        if (operator === 'gt') return current > volume;
+        if (operator === 'lt') return current < volume;
+        return false;
+      });
+
+    this.homey.flow.getConditionCard('is_playing_manual')
+      .registerRunListener(async ({ device }) => device.isPlaying());
+
+    this.homey.flow.getConditionCard('is_muted_manual')
+      .registerRunListener(async ({ device }) => device.isMuted());
+
+    const sourcesAutocomplete = async (query, { device }) => {
+      const modeMap = device.getStoreValue('modeMap') || {};
+      return Object.entries(modeMap)
+        .filter(([_, label]) => !query || label.toLowerCase().includes(query.toLowerCase()))
+        .map(([id, label]) => ({ id, name: label }));
+    };
+
+    const selectSourceCard = this.homey.flow.getActionCard('select_source_manual');
+    selectSourceCard.getArgument('source').registerAutocompleteListener(sourcesAutocomplete);
+    selectSourceCard.registerRunListener(async ({ device, source }) =>
+      device.setSource(parseInt(source.id, 10)));
+
+    this.homey.flow.getActionCard('select_preset_manual')
+      .registerRunListener(async ({ device, preset }) => {
+        if (device.getCurrentPreset() === preset) return;
+        return device.setPreset(preset);
+      });
+
+    const turnOnFullCard = this.homey.flow.getActionCard('turn_on_full_manual');
+    turnOnFullCard.getArgument('source').registerAutocompleteListener(sourcesAutocomplete);
+    turnOnFullCard.registerRunListener(async ({ device, source, preset, volume }) =>
+      device.turnOnFull(parseInt(source.id, 10), preset, volume));
+  }
+
   async onPair(session) {
     session.setHandler('pair_radio', async ({ ip, pin }) => {
       try {
